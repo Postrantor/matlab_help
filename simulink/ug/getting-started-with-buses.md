@@ -1,0 +1,150 @@
+---
+> 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [ww2.mathworks.cn](https://ww2.mathworks.cn/help/simulink/ug/getting-started-with-buses.html)
+
+> 创建总线以减少模块图中的信号线数量。
+---
+## 将信号或消息组合到虚拟总线中
+
+您可以将多个信号或消息组合成一个总线，然后将总线作为一个整体进行访问，或者从总线中选择特定元素。虚拟 Simulink® **总线信号类似于用束线带绑在一起的一捆电线**。同样，非虚拟 Simulink 总线类似于 C 代码中的结构体。
+
+不是所有模块都可以接受总线，一些模块隐式将总线转换为向量。要了解哪些模块支持哪种类型的总线，请参阅 [Bus-Capable Blocks](https://ww2.mathworks.cn/help/simulink/ug/bus-capable-blocks-1.html)。要标识总线转换，请参阅 [Manage Bus-to-Vector Conversions](https://ww2.mathworks.cn/help/simulink/slref/convert-bus-signal-to-a-vector.html)。
+
+创建虚拟总线的方式因要组合的信号或消息的位置而异。
+
+要从总线中提取元素，请在组件中使用 [Bus Selector](https://ww2.mathworks.cn/help/simulink/slref/busselector.html) 模块，或在组件接口处使用 [In Bus Element](https://ww2.mathworks.cn/help/simulink/slref/inbuselement.html) 模块。
+
+为了重点讲述基本步骤，以下示例很简单，但如果您有许多信号或消息要组合，总线将非常有用。
+
+**提示**
+
+当您打开模型或创建总线时，Simulink 编辑器不会显示总线线型。要更新线型，必须编译模型。在 Simulink 工具条的**建模**选项卡上，点击**更新模型**或**运行**。
+
+### 将信号线组合在一个组件内
+
+您可以使用 Bus Creator 模块将信号组合到一个组件内的一个虚拟总线中。
+
+打开包含三个模块的示例模型。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/CreateAndUseVirtualBusesExample_01.png)
+
+要创建一个包含来自多个模块的输出的总线，请拖动以选择这些模块。对于此示例，请选择 Chirp Signal 和 Sine Wave 模块。在出现的操作栏中，点击**创建总线**。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusCreationActionBar.png)
+
+Simulink 会添加 Bus Creator 模块，并将输入连接到该模块。Bus Creator 模块的输出是虚拟总线。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusCreation1.png)
+
+为了更容易识别总线的元素，请对 Bus Creator 模块的输入加标签。通过双击线并输入 `Chirp`，对 Chirp Signal 模块的输出加标签。同样，对 Sine Wave 模块 `Sine` 的输出加标签。
+
+要创建包含第一条总线和 Step 模块输出的第二条总线，请拖动以选择 Bus Creator 和 Step 模块。在出现的操作栏中，点击**创建总线**。由于 `Sine` 和 `Chirp` 信号是输入总线的元素，因此无论您的选择是否包括 Sine Wave 和 Chirp Signal 模块，Simulink 都会创建相同的总线。
+
+Simulink 会添加另一个 Bus Creator 模块，并将输入连接到该模块。Bus Creator 模块的输出是包含嵌套总线的虚拟总线。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusCreation2.png)
+
+您可以将总线嵌套至任意深度。如果 Bus Creator 模块的输入之一是总线，则其输出是包含至少一个嵌套总线的总线层次结构。
+
+对 Step 模块 `Step` 的输出和第一个 Bus Creator 模块 `NestedBus` 的输出加标签。或者，排列模块以提高模型的可读性。
+
+将第二个 Bus Creator 模块的输出连接到 Scope 模块，并对输出加标签 `TopBus`。要直观地识别总线，请通过点击 Simulink 工具条的**建模**选项卡上的**更新模型**或**运行**来编译模型。编译模型会更新线型。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusCreationFinal.png)
+
+### 将多个输出信号连接到一个端口
+
+此示例说明如何使用 Out Bus Element 模块将子系统或模型的输出信号组合到一个虚拟总线中。
+
+打开包含三个源模块的示例模型。
+
+![](https://ww2.mathworks.cn/help/simulink/ug/createvirtualbusesatinterfacesexample_01_zh_CN.png)
+
+向模型中添加一个 Out Bus Element 模块。Out Bus Element 模块类似于连接到 Outport 模块的 Bus Creator 模块。将 Chirp Signal 模块的输出连接到 Out Bus Element 模块。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusOutputCreationBlock.png)
+
+Out Bus Element 模块旁边的标签有两个部分。标签的第一部分描述总线 (`OutBus`)，标签的第二个部分描述总线元素 (`signal1`)。为了更容易识别总线的元素，请双击 `signal1` 并输入 `Chirp` 来重命名元素。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusOutputCreationLabel.png)
+
+对 Out Bus Element 模块使用 **Ctrl** + 拖动两次来创建该模块的两个副本。以这种方式复制模块时，请指定是创建新端口还是使用现有端口。要创建一条包含所有信号的输出总线，请在每次复制模块时选择**使用现有端口**，然后连接信号。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusOutputCreationSelection.png)
+
+要在输出总线中创建层次结构，请在描述总线元素的标签部分使用圆点。每个圆点创建一个新的层次结构级别。通过将总线元素分别定义为 `NestedBus.Sine` 和 `NestedBus.Step`，创建一个名为 `NestedBus` 的嵌套总线。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusOutputCreationHierarchy.png)
+
+您也可以将总线连接到 Out Bus Element 模块。如果其他 Out Bus Element 模块对应于同一个端口，则总线嵌套在输出总线中。标签中说明总线元素的部分提供此嵌套总线的名称。
+
+通过双击任一 Out Bus Element 模块，在端口的对话框中检查总线层次结构。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusOutputCreationDialog.png)
+
+三个 Out Bus Element 模块在模型的输出端口创建一个虚拟总线。要查看该虚拟总线，请在另一个模型中引用该模型，或将这些 Out Bus Element 模块移至一个子系统中。当您编译模型时，线型会更新。要编译模型，请在 Simulink 工具条的**建模**选项卡上，点击**更新模型**或**运行**。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusOutputCreationPort.png)
+
+### 将多个子系统端口合并为一个端口
+
+此示例说明通过将多个端口及其连接的信号转换为一个端口和一条总线来简化子系统接口的三种方法。模型接口不支持这种自动转换。
+
+打开示例模型，它包含两个具有多个输入和输出端口的子系统。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/ConvertMultiplePortsIntoABusPortExample_01.png)
+
+在两个子系统之间的信号线周围拖动以形成一个选择框。在出现的操作栏中点击**创建总线**。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusPortCreationBetween.png)
+
+Simulink 将源子系统和目标子系统中的 Inport 模块和 Outport 模块替换为 In Bus Element 模块和 Out Bus Element 模块。
+
+在源模块和第一个子系统之间的信号线周围拖动以形成一个选择框。从出现的操作栏中，点击**创建总线**。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusPortCreationInput.png)
+
+Simulink 在第一个子系统之前添加 Bus Creator 模块，并将第一个子系统中的 Inport 模块替换为 In Bus Element 模块。
+
+在第二个子系统和 Scope 模块之间的信号线周围拖动以形成一个选择框。从出现的操作栏中，点击**创建总线**。
+
+![](https://ww2.mathworks.cn/help/examples/simulink/win64/xxVirtualBusPortCreationOutput.png)
+
+Simulink 将第二个子系统中的 Outport 模块替换为 Out Bus Element 模块，并在第二个子系统后添加 Bus Selector 模块。
+
+生成的模型在子系统接口上使用虚拟总线。
+
+![](https://ww2.mathworks.cn/help/simulink/ug/xxvirtualbusportcreationfinal_zh_CN.png)
+
+## 另请参阅
+
+[Bus Creator](https://ww2.mathworks.cn/help/simulink/slref/buscreator.html) | [Bus Selector](https://ww2.mathworks.cn/help/simulink/slref/busselector.html) | [In Bus Element](https://ww2.mathworks.cn/help/simulink/slref/inbuselement.html) | [Out Bus Element](https://ww2.mathworks.cn/help/simulink/slref/outbuselement.html)
+
+## 相关主题
+
+- [合成接口规范](https://ww2.mathworks.cn/help/simulink/ug/composite-signal-techniques.html)
+- [Bus-Capable Blocks](https://ww2.mathworks.cn/help/simulink/ug/bus-capable-blocks-1.html)
+- [Display Bus Information](https://ww2.mathworks.cn/help/simulink/ug/view-composite-signals.html)
+- [使用 Simulink.Bus 对象数据类型指定总线属性](https://ww2.mathworks.cn/help/simulink/ug/when-to-use-bus-objects.html)
+- [指定总线元素的初始条件](https://ww2.mathworks.cn/help/simulink/ug/specifying-initial-conditions-for-bus-signals.html)
+
+您曾对此示例进行过修改。是否要打开带有您的编辑的示例？
+
+本页内容对您有帮助吗？
+
+Unrated
+
+1 star
+
+2 stars
+
+3 stars
+
+4 stars
+
+5 stars
+
+Unrated 1 star 2 stars 3 stars 4 stars 5 stars
+
+您点击的链接对应于以下 MATLAB 命令：
+
+请在 MATLAB 命令行窗口中直接输入以执行命令。Web 浏览器不支持 MATLAB 命令。
