@@ -2,7 +2,6 @@
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [ww2.mathworks.cn](https://ww2.mathworks.cn/help/stateflow/gs/actions.html)
 > 通过使用状态和转移中的动作来控制 Stateflow 图的行为。
 ---
-
 *状态动作*和*转移动作*是您分别在状态内部或转移上编写的指令，用于定义 Stateflow® 图在仿真期间的行为。例如，下图中的动作定义了一个以试验方式验证 Collatz 猜想实例的状态机。对于给定的数值输入 ![](https://ww2.mathworks.cn/help/stateflow/gs/statetransitionactionsgetstartedexample_eq15012583454694319273_zh_CN.png)，该图通过迭代以下规则来计算冰雹序列 ![](https://ww2.mathworks.cn/help/stateflow/gs/statetransitionactionsgetstartedexample_eq12219811583566878803_zh_CN.png) ![](https://ww2.mathworks.cn/help/stateflow/gs/statetransitionactionsgetstartedexample_eq11325635569159405358_zh_CN.png) ![](https://ww2.mathworks.cn/help/stateflow/gs/statetransitionactionsgetstartedexample_eq10936753333647109350_zh_CN.png) ![](https://ww2.mathworks.cn/help/stateflow/gs/statetransitionactionsgetstartedexample_eq17216054076818118233_zh_CN.png)：
 
 Collatz 猜想指出，每个正整数都有一个最终达到 1 的冰雹序列。

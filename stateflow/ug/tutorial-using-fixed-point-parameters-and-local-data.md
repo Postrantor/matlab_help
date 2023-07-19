@@ -7,12 +7,11 @@ tag:
 summary: Model a low-pass Butterworth filter that uses fixed-point arithmetic.
 > 模拟低通布特沃斯滤波器，使用定点算法。
 ---
-
 Main Content
 
 This example shows how to build a Stateflow® chart that uses fixed-point data to implement a low-pass Butterworth filter. By designing the filter with fixed-point data instead of floating-point data, you can simulate your model using less memory. For more information, see [Fixed-Point Data in Stateflow Charts](https://ww2.mathworks.cn/help/stateflow/ug/what-is-fixed-point-data.html).
 
-> 这个例子展示了如何构建一个使用定点数据实现低通 Butterworth 滤波器的 Stateflow® 图表。 通过使用定点数据而不是浮点数据设计滤波器，您可以使用更少的内存来模拟模型。 有关更多信息，请参见[Stateflow 图表中的定点数据](https://ww2.mathworks.cn/help/stateflow/ug/what-is-fixed-point-data.html)。
+> 这个例子展示了如何构建一个使用定点数据实现低通 Butterworth 滤波器的 Stateflow® 图表。 通过使用定点数据而不是浮点数据设计滤波器，您可以使用更少的内存来模拟模型。 有关更多信息，请参见 [Stateflow 图表中的定点数据](https://ww2.mathworks.cn/help/stateflow/ug/what-is-fixed-point-data.html)。
 
 ![](https://ww2.mathworks.cn/help/examples/stateflow/win64/LowPassButterworthFilterExample_01.png)
 
@@ -36,15 +35,15 @@ The values of `b0`, `b1`, and `a1` are the coefficients of the low-pass Butterwo
 
 To build the Low-Pass Filter chart:
 
-1.  Create a Simulink® model with an empty Stateflow chart by entering [`sfnew`](https://ww2.mathworks.cn/help/stateflow/ref/sfnew.html) at the MATLAB® command prompt.
+1. Create a Simulink® model with an empty Stateflow chart by entering [`sfnew`](https://ww2.mathworks.cn/help/stateflow/ref/sfnew.html) at the MATLAB® command prompt.
 
 > 在 MATLAB® 命令提示符中输入[`sfnew`](https://ww2.mathworks.cn/help/stateflow/ref/sfnew.html)，创建一个带有空状态流图的 Simulink® 模型。
 
-2.  In the Stateflow chart, add a flow chart with a single branch that assigns values to `y`, `x_n1`, and `y_n1`.
+2. In the Stateflow chart, add a flow chart with a single branch that assigns values to `y`, `x_n1`, and `y_n1`.
 
-> 在 Stateflow 图中，添加一个具有单个分支的流程图，用于将值分配给`y`，`x_n1`和`y_n1`。
+> 在 Stateflow 图中，添加一个具有单个分支的流程图，用于将值分配给 `y`，`x_n1` 和 `y_n1`。
 
-3.  Add input, output, local, and parameter data to the chart, as described in [Add Stateflow Data](https://ww2.mathworks.cn/help/stateflow/ug/adding-data.html).
+3. Add input, output, local, and parameter data to the chart, as described in [Add Stateflow Data](https://ww2.mathworks.cn/help/stateflow/ug/adding-data.html).
 
 > 在图表中添加输入、输出、局部和参数数据，如[添加 Stateflow 数据](https://ww2.mathworks.cn/help/stateflow/ug/adding-data.html)中所述。
 
@@ -52,14 +51,14 @@ To build the Low-Pass Filter chart:
 
 Before loading the model, MATLAB calls the [`butter`](https://ww2.mathworks.cn/help/signal/ref/butter.html) (Signal Processing Toolbox) function to compute the values for the parameters `b0`, `b1`, and `a1`. The function constructs a first-order low-pass Butterworth filter with a normalized cutoff frequency of `(2*pi*Fc/(Fs/2))` radians per second, where:
 
-> 在加载模型之前，MATLAB 会调用[`butter`](https://ww2.mathworks.cn/help/signal/ref/butter.html)（信号处理工具箱）函数来计算参数`b0`、`b1`和`a1`的值。该函数构造一个一阶低通 Butterworth 滤波器，其归一化截止频率为`(2*pi*Fc/(Fs/2))`赫兹每秒，其中：
+> 在加载模型之前，MATLAB 会调用[`butter`](https://ww2.mathworks.cn/help/signal/ref/butter.html)（信号处理工具箱）函数来计算参数 `b0`、`b1` 和 `a1` 的值。该函数构造一个一阶低通 Butterworth 滤波器，其归一化截止频率为 `(2*pi*Fc/(Fs/2))` 赫兹每秒，其中：
 
 - The sampling frequency is `Fs` = 1000 Hz.
 - The cutoff frequency is `Fc` = 50 Hz.
 
 The function output `B` contains the numerator coefficients of the filter in descending powers of `z`. The function output `A` contains the denominator coefficients of the filter in descending powers of `z`.
 
-> 函数输出`B`包含以`z`为降序的滤波器的分子系数。函数输出`A`包含以`z`为降序的滤波器的分母系数。
+> 函数输出 `B` 包含以 `z` 为降序的滤波器的分子系数。函数输出 `A` 包含以 `z` 为降序的滤波器的分母系数。
 
 ```
 Fs = 1000;
@@ -74,13 +73,13 @@ a1 = A(2);
 
 To define the preload callback for the model:
 
-1.  In the **Modeling** tab, under **Setup**, select **Model Settings** > **Model Properties**.
+1. In the **Modeling** tab, under **Setup**, select **Model Settings** > **Model Properties**.
 
 > 在**建模**选项卡下，在**设置**下，选择**模型设置** > **模型属性**。
 
-2.  In the Model Properties dialog box, on the **Callbacks** tab, select **PreLoadFcn**.
+2. In the Model Properties dialog box, on the **Callbacks** tab, select **PreLoadFcn**.
 
-> 在模型属性对话框中，在**回调**选项卡上，选择**PreLoadFcn**。 3. Enter the MATLAB code for the preload function call. 4. Click **OK**.
+> 在模型属性对话框中，在**回调**选项卡上，选择 **PreLoadFcn**。 3. Enter the MATLAB code for the preload function call. 4. Click **OK**.
 
 To load the parameter values to the MATLAB workspace, save, close, and reopen the model.
 
@@ -143,9 +142,9 @@ Because none of the blocks in the model have a continuous sample time, use a dis
 
 To configure the model:
 
-1.  In the **Modeling** tab, under **Setup**, select **Model Settings**.
-2.  In the **Solver** pane, set the discrete solver parameters.
-3.  Click **OK**.
+1. In the **Modeling** tab, under **Setup**, select **Model Settings**.
+2. In the **Solver** pane, set the discrete solver parameters.
+3. Click **OK**.
 
 ### Run the Model
 

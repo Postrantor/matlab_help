@@ -7,7 +7,6 @@ date: 2023-07-12 16:18:03
 tag: 
 summary: 向您说明在仿真过程中跟踪 Stateflow 数据和自主活动值的各种方法。
 ---
-
 ## 在调试模式下检查和修改数据和消息
 
 当您的 Stateflow® 图处于调试模式时，您可以通过检查数据、消息和时序逻辑表达式的值来检查图的状态。您还可以通过修改数据值以及发送局部和输出消息来测试图的设计。下表总结了可用于执行这些调试任务的接口。有关详细信息，请参阅 [Set Breakpoints to Debug Charts](https://ww2.mathworks.cn/help/stateflow/ug/set-breakpoints-to-debug-charts.html)。
@@ -130,12 +129,10 @@ summary: 向您说明在仿真过程中跟踪 Stateflow 数据和自主活动值
   u(2,2) = 6.626e-34
 
   ```
-
 - 对于可变大小的数据，可以在指定的维度范围内更改其维度。例如，假设 `v` 是可变大小数组，其最大大小为 `[16 16]`。要将 `v` 的值更改为由 1 组成的 5×7 数组，请输入：
 - 要修改枚举数据，请使用带前缀的标识符显式指定枚举类型。请参阅 [Notation for Enumerated Values](https://ww2.mathworks.cn/help/stateflow/ug/using-enumerated-data.html#brqmyi3)。
 
   例如，假设 `w` 具有枚举数据类型 `Colors`。要将 `w` 的值更改为枚举值 `Red`，请输入：
-
 - 要修改数值数据，请使用 MATLAB 类型转换函数将其转换为显式数据类型。`double` 类型的数据不需要显式转换。请参阅[类型转换运算](https://ww2.mathworks.cn/help/stateflow/ug/operations-for-stateflow-data.html#f0-61218)。
 
   例如，假设 `x` 的类型为 `single`，`y` 的类型为 `int32`，`z` 的类型为 `fixdt(1,16,12)`。要更改这些数据对象的值，请输入：
@@ -146,7 +143,6 @@ summary: 向您说明在仿真过程中跟踪 Stateflow 数据和自主活动值
   z = fi(0.5413,1,16,12);
 
   ```
-
 - 您无法在调试提示符下更改常量、参数或输入数据的值。
 
 #### 使用调试提示符发送消息

@@ -7,7 +7,6 @@ date: 2023-07-12 16:26:11
 tag: 
 summary: 此示例说明如何使用 MATLAB 和 Stateflow® 结构体在 MATLAB® 函数中读取和写入 Simulink® 总线信号。
 ---
-
 此示例说明如何使用 MATLAB 和 Stateflow® 结构体在 MATLAB® 函数中读取和写入 Simulink® 总线信号。MATLAB 结构体使您能够将不同大小和类型的数据捆绑到一个变量中。您可以创建一个 MATLAB 结构体来实现以下目的：
 
 - 将相关数据存储在 MATLAB 函数的一个局部变量或持久变量中
@@ -26,7 +25,7 @@ MATLAB 函数仅支持非虚拟总线。有关详细信息，请参阅[合成接
 
 ![](https://ww2.mathworks.cn/help/examples/stateflow/win64/ConnectMATLABStructsToSimulinkBusExample_02.png)
 
-MATLAB® 函数 `sb2abc` 接受 `SubBus` 类型的 Stateflow 结构体，并返回 `BusObject` 类型的 Stateflow 结构体。该函数将来自其输入的字段 `ele` 的值分解为三个组成部分：一个向量、一个 3×2 矩阵和一个标量。该函数将这些组成部分存储在一个局部 MATLAB `` [`struct`](https://ww2.mathworks.cn/help/matlab/ref/struct.html) `` 中，后者与 `Simulink.Bus` 对象 `BusObject` 具有相同的字段。然后，该函数将 MATLAB `struct` 的值赋给输出结构体 `y`。
+MATLAB® 函数 `sb2abc` 接受 `SubBus` 类型的 Stateflow 结构体，并返回 `BusObject` 类型的 Stateflow 结构体。该函数将来自其输入的字段 `ele` 的值分解为三个组成部分：一个向量、一个 3×2 矩阵和一个标量。该函数将这些组成部分存储在一个局部 MATLAB ``[`struct`](https://ww2.mathworks.cn/help/matlab/ref/struct.html)`` 中，后者与 `Simulink.Bus` 对象 `BusObject` 具有相同的字段。然后，该函数将 MATLAB `struct` 的值赋给输出结构体 `y`。
 
 ```
 % extract data from input structure
@@ -44,9 +43,9 @@ Y = struct(sb=X,a=A,b=B,c=C);
 
 在 MATLAB 函数中，您可以通过定义函数的输入和输出结构体来访问局部 Stateflow 结构体或对接 Simulink 总线信号：
 
-1.  在基础工作区中，创建一个定义结构体数据类型的 `Simulink.Bus` 对象。
-2.  在**符号**窗格中，选择函数输入或输出。
-3.  在**属性检查器**中，将**类型**属性设置为 `Bus: <object name>`。用定义 Stateflow 结构体的 `Simulink.Bus` 对象的名称替换 <对象名称>。
+1. 在基础工作区中，创建一个定义结构体数据类型的 `Simulink.Bus` 对象。
+2. 在**符号**窗格中，选择函数输入或输出。
+3. 在**属性检查器**中，将**类型**属性设置为 `Bus: <object name>`。用定义 Stateflow 结构体的 `Simulink.Bus` 对象的名称替换 < 对象名称 >。
 
 例如，在函数 `sb2abc` 中：
 

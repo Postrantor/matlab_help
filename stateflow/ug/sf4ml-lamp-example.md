@@ -2,7 +2,6 @@
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [ww2.mathworks.cn](https://ww2.mathworks.cn/help/stateflow/ug/sf4ml-lamp-example.html)
 > 在独立 Stateflow 图中对信号灯 App 的逻辑进行建模。
 ---
-
 此示例说明如何在独立 Stateflow® 图中对图形用户界面的逻辑建模。独立图使用 MATLAB® 作为动作语言来实现经典图语义。您可以使用 MATLAB 的全部功能对图进行编程，包括那些仅限于在 Simulink® 中进行代码生成的函数。有关详细信息，请参阅 [Create Stateflow Charts for Execution as MATLAB Objects](https://ww2.mathworks.cn/help/stateflow/ug/create-stateflow-chart-objects.html)。
 
 您可以通过调用其输入事件并使用时序运算符来执行独立 Stateflow 图。事件驱动和计时器驱动的执行工作流适用于设计人机界面 (HMI) 和图形用户界面 (UI) 的基础逻辑。

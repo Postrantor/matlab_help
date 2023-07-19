@@ -7,11 +7,10 @@ date: 2023-07-12 16:20:07
 tag: 
 summary: 此示例说明如何访问和修改 Stateflow® 结构体的内容或 Stateflow 结构体的数组。
 ---
-
 > [!NOTE]
 > .[在 MATLAB 函数中访问 Simulink 总线信号](https://ww2.mathworks.cn/help/stateflow/ug/working-with-structures-and-bus-signals-in-matlab-functions.html)
 
-此示例说明如何访问和修改 Stateflow® 结构体的内容或 Stateflow 结构体的数组。Stateflow 结构体是您从 `` [`Simulink.Bus`](https://ww2.mathworks.cn/help/simulink/slref/simulink.bus.html) (Simulink) `` 对象定义的一种数据类型。您可以使用 Stateflow 结构体将不同大小和类型的数据一起捆绑到一个数据对象中。有关详细信息，请参阅 [Access Bus Signals Through Stateflow Structures](https://ww2.mathworks.cn/help/stateflow/ug/about-stateflow-structures.html)。
+此示例说明如何访问和修改 Stateflow® 结构体的内容或 Stateflow 结构体的数组。Stateflow 结构体是您从 ``[`Simulink.Bus`](https://ww2.mathworks.cn/help/simulink/slref/simulink.bus.html) (Simulink)`` 对象定义的一种数据类型。您可以使用 Stateflow 结构体将不同大小和类型的数据一起捆绑到一个数据对象中。有关详细信息，请参阅 [Access Bus Signals Through Stateflow Structures](https://ww2.mathworks.cn/help/stateflow/ug/about-stateflow-structures.html)。
 
 ### 对子结构体和字段进行索引
 

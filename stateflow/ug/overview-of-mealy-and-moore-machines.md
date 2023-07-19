@@ -7,7 +7,6 @@ date: 2023-07-12 16:01:36
 tag: 
 summary: 创建实现 Mealy 和 Moore 状态机语义的图。
 ---
-
 > [!NOTE]
 > .[使用 Mealy 和 Moore 图进行序列识别](https://ww2.mathworks.cn/help/stateflow/ug/sequence-recognition-using-mealy-and-moore-charts.html)
 

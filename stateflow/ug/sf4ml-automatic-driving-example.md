@@ -7,7 +7,6 @@ tag:
 summary: Model a highway scenario with intelligent vehicles that are controlled by the same decision logic.
 > 概括：用相同的决策逻辑控制的智能车辆模拟高速公路场景。
 ---
-
 This example shows how to model a highway scenario with intelligent vehicles that are controlled by the same decision logic. Each vehicle determines when to speed up, slow down, or change lanes based on the logic defined by a standalone Stateflow® chart. Because the driving conditions (including the relative position and speed of nearby vehicles) differ from vehicle to vehicle, separate chart objects in MATLAB® control the individual vehicles on the highway.
 
 > 这个例子展示了如何使用同一决策逻辑控制智能车辆来模拟公路场景。每辆车根据独立的 Stateflow® 图定义的逻辑来决定何时加速、减速或变道。由于驾驶条件（包括附近车辆的相对位置和速度）因车辆而异，MATLAB® 中的单独图表对路上的各个车辆进行控制。
@@ -24,9 +23,9 @@ Starting from a random position, each vehicle attempts to travel at a target spe
 
 > 从一个随机位置开始，每辆车尝试以目标速度行驶。由于目标速度是随机选择的，车辆会互相阻碍。在这种情况下，车辆会尝试换道，并恢复其目标速度。
 
-The class file `HighwayScenario` defines a `` [`drivingScenario`](https://www.mathworks.com/help/driving/ref/drivingscenario.html) (Automated Driving Toolbox) `` object that represents the 3-D environment that contains the highway and the vehicles on it. To control the motion of the vehicles, the `drivingScenario` object creates an array of Stateflow chart objects. Each chart object controls a different vehicle in the simulation.
+The class file `HighwayScenario` defines a ``[`drivingScenario`](https://www.mathworks.com/help/driving/ref/drivingscenario.html) (Automated Driving Toolbox)`` object that represents the 3-D environment that contains the highway and the vehicles on it. To control the motion of the vehicles, the `drivingScenario` object creates an array of Stateflow chart objects. Each chart object controls a different vehicle in the simulation.
 
-> 这个类文件`HighwayScenario`定义了一个[`drivingScenario`](https://www.mathworks.com/help/driving/ref/drivingscenario.html)（自动驾驶工具箱）对象，它表示包含公路及其上的车辆的 3D 环境。为了控制车辆的运动，`drivingScenario`对象创建了一个 Stateflow 图对象数组。每个图对象控制模拟中的不同车辆。
+> 这个类文件 `HighwayScenario` 定义了一个[`drivingScenario`](https://www.mathworks.com/help/driving/ref/drivingscenario.html)（自动驾驶工具箱）对象，它表示包含公路及其上的车辆的 3D 环境。为了控制车辆的运动，`drivingScenario` 对象创建了一个 Stateflow 图对象数组。每个图对象控制模拟中的不同车辆。
 
 ### Execute Decision Logic for Vehicles
 
@@ -36,7 +35,7 @@ The Stateflow chart `sf_driver` consists of two top-level states, `LaneKeep` and
 
 When the `LaneKeep` state is active, the corresponding vehicle stays in its lane of traffic. In this state, there are two possible substates:
 
-> 当`LaneKeep`状态处于活动状态时，相应的车辆保持在其交通车道上。在此状态下，有两种可能的子状态：
+> 当 `LaneKeep` 状态处于活动状态时，相应的车辆保持在其交通车道上。在此状态下，有两种可能的子状态：
 
 - `Cruise` is active when the zone directly in front of the vehicle is empty and the vehicle can travel at its target speed.
 
@@ -48,7 +47,7 @@ When the `LaneKeep` state is active, the corresponding vehicle stays in its lane
 
 When the `LaneChange` state is active, the corresponding vehicle attempts to change lanes. In this state, there are two possible substates:
 
-> 当`LaneChange`状态处于活动状态时，相应的车辆尝试更换车道。在此状态下，有两种可能的子状态：
+> 当 `LaneChange` 状态处于活动状态时，相应的车辆尝试更换车道。在此状态下，有两种可能的子状态：
 
 - `Continue` is active when the zone next to the vehicle is empty and the vehicle can change lanes safely.
 
@@ -56,13 +55,13 @@ When the `LaneChange` state is active, the corresponding vehicle attempts to cha
 
 - `Abort` becomes active when the zone next to the vehicle is occupied. In this case, the vehicle is forced to remain in its lane.
 
-> 当车辆旁边的区域被占据时，`中止`就会变为活动状态。在这种情况下，车辆被迫留在其车道上。
+> 当车辆旁边的区域被占据时，`中止` 就会变为活动状态。在这种情况下，车辆被迫留在其车道上。
 
 ![](https://www.mathworks.com/help/examples/driving_stateflow/win64/AutomatedDriverControlInStateflowExample_01.png)
 
 The transitions between the states `LaneKeep` and `LaneChange` are guarded by the value of `isLaneChanging`. In the `LaneKeep` state, the chart sets this local data to `true` when the substate `Follow` is active and there is enough room beside the vehicle to change lanes. In the `LaneChange` state, the chart sets this local data to `false` when the vehicle finishes changing lanes.
 
-> 在`LaneKeep`和`LaneChange`状态之间的转换由`isLaneChanging`的值来守卫。在`LaneKeep`状态中，当子状态`Follow`处于活动状态且车辆旁边有足够的空间可以更换车道时，图表将此本地数据设置为`true`。在`LaneChange`状态中，当车辆完成更换车道时，图表将此本地数据设置为`false`。
+> 在 `LaneKeep` 和 `LaneChange` 状态之间的转换由 `isLaneChanging` 的值来守卫。在 `LaneKeep` 状态中，当子状态 `Follow` 处于活动状态且车辆旁边有足够的空间可以更换车道时，图表将此本地数据设置为 `true`。在 `LaneChange` 状态中，当车辆完成更换车道时，图表将此本地数据设置为 `false`。
 
 ## See Also
 

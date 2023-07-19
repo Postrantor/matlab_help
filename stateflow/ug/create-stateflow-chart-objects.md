@@ -3,7 +3,6 @@ tip: translate by openai@2023-06-21 15:37:31
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [ww2.mathworks.cn](https://ww2.mathworks.cn/help/stateflow/ug/create-stateflow-chart-objects.html)
 > Save standalone Stateflow charts outside of Simulink models.https://ww2.mathworks.cn/help/stateflow/ug/create-stateflow-chart-objects.html
 ---
-
 ## Create Stateflow Charts for Execution as MATLAB Objects
 
 To combine the advantages of state machine programming with the full functionality of MATLAB®, create a standalone Stateflow® chart outside of a Simulink® model. Save the standalone chart with the extension `.sfx` and execute it as a MATLAB object. Refine your design by using chart animation and graphical debugging tools.

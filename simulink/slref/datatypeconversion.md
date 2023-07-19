@@ -2,7 +2,6 @@
 > 本文由 [简悦 SimpRead](http://ksria.com/simpread/) 转码， 原文地址 [ww2.mathworks.cn](https://ww2.mathworks.cn/help/simulink/slref/datatypeconversion.html)
 > Data Type Conversion 模块可将任何 Simulink 数据类型的输入信号转换为您指定的数据类型。
 ---
-
 ![](https://ww2.mathworks.cn/help/simulink/slref/data_type_conversion_block_icon.png)
 
 **库：**
@@ -40,7 +39,6 @@ Data Type Conversion 模块可将任何 Simulink® 数据类型的输入信号�
 1. 将枚举类型的信号转换为任意数值类型的信号。
 
    Data Type Conversion 模块的所有枚举值输入的基础整数都必须在该数值类型的范围内。否则，仿真过程中将发生错误。
-
 2. 将任意整数类型的信号转换为枚举类型的信号。
 
    Data Type Conversion 模块的值输入必须与枚举值的基础值匹配。否则，仿真过程中将发生错误。
@@ -188,7 +186,6 @@ Simulink 使用最大值执行下列操作：
 - `off` - 溢出将绕回到数据类型可以表示的合适值。
 
   例如，数字 130 不适合一个有符号的 8 位整数，因此绕回 -126。
-
 - `on` - 将溢出饱和处理为数据类型能够表示的最小值或最大值。
 
   例如，一个有符号的 8 位整数的溢出可以饱和处理为 -128 或 127。
@@ -199,7 +196,6 @@ Simulink 使用最大值执行下列操作：
 - 如果您希望优化生成的代码的效率，请考虑清除此复选框。
 
   清除此复选框还可以帮助您避免过度地指定信号超出范围时的处理方式。有关详细信息，请参阅[信号范围错误故障排除](https://ww2.mathworks.cn/help/simulink/ug/signal-ranges.html#brdiku9)。
-
 - 如果选中此复选框，饱和将应用于模块中的每个内部操作，而不仅仅应用于输出或结果。
 - 一般情况下，代码生成进程可以检测到何时不可能发生溢出。在这种情况下，代码生成器不会生成饱和代码。
 

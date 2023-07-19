@@ -9,7 +9,6 @@ summary: The need to bring innovative, high quality products to market faster is
 > 更快地将创新、高质量的产品推向市场的需求正在推动越来越多地使用......
 author: By Sameer M. Prabhu, MathWorks and Pieter J. Mosterman, MathWorks
 ---
-
 The need to bring innovative, high quality products to market faster is driving the increased use of models during the design and realization process in industry. Model-based design facilitates an advanced approach to product development, which aids in delivering products on time and within budget while meeting initial requirements. In addition, advances in model-based design tools, which allow automatic generation of prototype and production code from a model, significantly shorten the development path. This paper applies the model-based design process to the design of a power window control system that is typically found in modern automobiles and considers various aspects of the validation process via testing, both during simulation and physical realization.
 
 > 需要更快地将创新的高质量产品投放市场，正在推动工业在设计和实现过程中越来越多地使用模型。**基于模型的设计提供了一种先进的产品开发方法，有助于按时、按预算完成初始要求**。此外，基于模型的设计工具的进步，**可以从模型自动生成原型和生产代码**，大大缩短了开发路径。本文将基于模型的设计过程应用于通常可以在现代汽车中找到的电动窗控制系统的设计，并通过模拟和物理实现的测试考虑验证过程的各个方面。
@@ -34,7 +33,6 @@ In the traditional approach, strict boundaries between design activities are enf
 
 - Though rigorous, documents can be unwieldy and in an unsuitable form to record functionality.
 - It is difficult to keep the documentation synchronized with the present state of the design.
-
 - The separation between different design stages requires coding to be a separate and manual activity.
 
 > 分离不同设计阶段需要将编码作为一项独立的手动活动。
@@ -80,7 +78,6 @@ A typical power window system is designed to meet various requirements. For the 
 - The window has to start moving within 200 [ms] after the command is issued.
 - The window has to be fully opened and fully closed within 4 [s].
 - The force to detect when an object is present should be less than 100 [N].
-
 - If the up or down command is issued for at least 200 [ms] and at most 1 [s], the window has to be fully opened or closed, respectively.
 
 > 如果上或下指令发出时间在 200 毫秒到 1 秒之间，窗口就必须完全打开或关闭。
@@ -240,35 +237,35 @@ Published 2003
 
 ### References
 
-2.  Aldrich, B., “Using model coverage analysis to improve the controls development process,” AIAA 2002.
+2. Aldrich, B., “Using model coverage analysis to improve the controls development process,” AIAA 2002.
 
 > Aldrich B.，“利用模型覆盖分析改善控制开发过程”，AIAA 2002。
 
-3.  Dahlqvist, A, U. Asklund, I. Crnkovic, A. Hedin, M. Larsson, J. Ranby and D. Svensson, “Product Data Management and Software Configuration Management—Similarities and Differences,” The Association of Swedish Engineering Industries, September, 2001
+3. Dahlqvist, A, U. Asklund, I. Crnkovic, A. Hedin, M. Larsson, J. Ranby and D. Svensson, “Product Data Management and Software Configuration Management—Similarities and Differences,” The Association of Swedish Engineering Industries, September, 2001
 
 > 黛尔奎斯特、阿斯克隆德、克尔诺维奇、海丁、拉尔森、兰比和斯文森，“产品数据管理与软件配置管理——相似点和差异”，瑞典工业协会，2001 年 9 月。
 
-4.  Mosterman, P.J., J. Sztipanovits, and S. Engell, “Computer Automated Multi-Paradigm Modeling in Control Systems Technology,” IEEE Transactions on Control System Technology, 2003.
+4. Mosterman, P.J., J. Sztipanovits, and S. Engell, “Computer Automated Multi-Paradigm Modeling in Control Systems Technology,” IEEE Transactions on Control System Technology, 2003.
 
 > Mosterman, P.J., J. Sztipanovits 和 S. Engell，“控制系统技术中的计算机自动多范式建模”，IEEE 控制系统技术杂志，2003 年。
 
-5.  Müller-Glaser, K.D., G. Frick, E. Sax, and M. Kühl, “Multi-Paradigm Modeling in Embedded Systems Design,” IEEE Transactions on Control System Technology, 2003.
+5. Müller-Glaser, K.D., G. Frick, E. Sax, and M. Kühl, “Multi-Paradigm Modeling in Embedded Systems Design,” IEEE Transactions on Control System Technology, 2003.
 
 > 5. Müller-Glaser、K.D.、G. Frick、E. Sax 和 M. Kühl，《嵌入式系统设计中的多范式建模》，IEEE 控制系统技术杂志，2003 年。
 
-6.  Robert Bosch GmbH, “CAN Specification,” Technical Report, Robert Bosch GmbH, Postfach 30 02 40, D-70442, Stuttgart, Germany, 1991
+6. Robert Bosch GmbH, “CAN Specification,” Technical Report, Robert Bosch GmbH, Postfach 30 02 40, D-70442, Stuttgart, Germany, 1991
 
 > 罗伯特·博世有限公司，“CAN 规范”，技术报告，罗伯特·博世有限公司，邮政编码 30 02 40，D-70442，德国斯图加特，1991 年。
 
-7.  The MathWorks Inc., “Using MATLAB,” Version 6.5, The MathWorks Inc., Natick, MA, August, 2002.
+7. The MathWorks Inc., “Using MATLAB,” Version 6.5, The MathWorks Inc., Natick, MA, August, 2002.
 
 > The MathWorks Inc.，《使用 MATLAB》，版本 6.5，The MathWorks Inc.，Natick，MA，2002 年 8 月。
 
-8.  The MathWorks Inc., “Using Simulink,” Version 5.0.2, The MathWorks Inc., Natick, MA, April, 2003.
+8. The MathWorks Inc., “Using Simulink,” Version 5.0.2, The MathWorks Inc., Natick, MA, April, 2003.
 
 > 《使用 Simulink》，The MathWorks Inc.，版本 5.0.2，The MathWorks Inc.，Natick，MA，2003 年 4 月。
 
-9.  The MathWorks Inc., “Stateflow and Stateflow Coder”, User's Guide, Version 5.0, The MathWorks Inc., Natick, MA, July, 2002.
+9. The MathWorks Inc., “Stateflow and Stateflow Coder”, User's Guide, Version 5.0, The MathWorks Inc., Natick, MA, July, 2002.
 
 > 《The MathWorks Inc.，“Stateflow 和 Stateflow Coder”，用户指南，版本 5.0，The MathWorks Inc.，Natick，MA，2002 年 7 月》
 
