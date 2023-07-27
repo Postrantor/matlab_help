@@ -9,6 +9,7 @@ tag:
 summary: Use Simulink blocks for ROS 2 to send and receive messages from a local ROS 2 network.
 > 使用Simulink块为ROS 2从本地ROS 2网络发送和接收消息。
 ---
+
 This example shows how to use Simulink blocks for ROS 2 to send and receive messages from a local ROS 2 network.
 
 > 这个例子展示了如何使用 Simulink 块与本地 ROS 2 网络进行消息发送和接收。
@@ -17,7 +18,7 @@ This example shows how to use Simulink blocks for ROS 2 to send and receive mess
 
 Simulink support for Robot Operating System 2 (ROS 2) enables you to create Simulink models that work with a ROS 2 network. ROS 2 is a communication layer that allows different components of a robot system to exchange information in the form of _messages_. A component sends a message by _publishing_ it to a particular _topic_, such as `/odometry`. Other components receive the message by _subscribing_ to that topic.
 
-> Simulink 支持机器人操作系统 2（ROS 2），可以创建与 ROS 2 网络一起工作的 Simulink 模型。 ROS 2 是一个通信层，允许机器人系统的不同组件以*消息*的形式交换信息。组件通过*发布*消息到特定的*主题*（如 `/odometry`）发送消息。其他组件通过订阅该主题来接收消息。
+> Simulink 支持机器人操作系统 2(ROS 2)，可以创建与 ROS 2 网络一起工作的 Simulink 模型。 ROS 2 是一个通信层，允许机器人系统的不同组件以*消息*的形式交换信息。组件通过*发布*消息到特定的*主题*(如 `/odometry`)发送消息。其他组件通过订阅该主题来接收消息。
 
 Simulink support for ROS 2 includes a library of Simulink blocks for sending and receiving messages for a designated topic. When you simulate the model, Simulink connects to a ROS 2 network, which can be running on the same machine as Simulink or on a remote system. Once this connection is established, Simulink exchanges messages with the ROS 2 network until the simulation is terminated. If Simulink Coder™ is installed, you can also generate C++ code for a standalone ROS 2 node, from the Simulink model.
 
@@ -30,7 +31,7 @@ This example shows how to:
 
 Prerequisites: [Create a Simple Model](https://www.mathworks.com/help/simulink/gs/create-a-simple-model.html), [Get Started with ROS 2](https://ww2.mathworks.cn/help/ros/ug/get-started-with-ros-2.html)
 
-> 前提条件：[创建简单模型](https://www.mathworks.com/help/simulink/gs/create-a-simple-model.html)，[开始使用 ROS 2](https://ww2.mathworks.cn/help/ros/ug/get-started-with-ros-2.html)
+> 前提条件：[创建简单模型]，[开始使用 ROS 2]
 
 ### Model
 
@@ -40,18 +41,17 @@ You will use Simulink to publish the `X` and `Y` location of a robot. You will a
 
 Enter the following command to open the completed [model](matlab:ros2GetStartedExample) created in example.
 
-> 輸入以下指令以開啟示例中建立的完成[模型](matlab:ros2GetStartedExample)：
+> 输入以下指令以开启示例中建立的完成[模型](matlab:ros2GetStartedExample)：
 
 ```
 open_system('ros2GetStartedExample');
-
 ```
 
 ### Create a Publisher
 
 Configure a block to send a `geometry_msgs/Point` message to a topic named `/location` (the "`/`" is standard ROS syntax).
 
-> 配置一个块来发送一个 `geometry_msgs/Point` 消息到一个名为 `/location` 的主题（"`/`"是标准 ROS 语法）。
+> 配置一个块来发送一个 `geometry_msgs/Point` 消息到一个名为 `/location` 的主题("`/`"是标准 ROS 语法)。
 
 - From the MATLAB Toolstrip, select **Home** _>_ **New** _>_ **Simulink Model** to open a new Simulink model.
 
@@ -59,7 +59,7 @@ Configure a block to send a `geometry_msgs/Point` message to a topic named `/loc
 
 - From the Simulink Toolstrip, select **Simulation** _>_ **Library Browser** to open the Simulink Library Browser. Click on the **ROS Toolbox** tab (you can also type `roslib` in MATLAB command window). Select the **ROS 2** Library.
 
-> 从 Simulink 工具栏中，选择**模拟**\_> **库浏览器**打开 Simulink 库浏览器。点击 **ROS Toolbox** 选项卡（您也可以在 MATLAB 命令窗口中输入 `roslib`）。选择 **ROS 2** 库。
+> 从 Simulink 工具栏中，选择**模拟**\_> **库浏览器**打开 Simulink 库浏览器。点击 **ROS Toolbox** 选项卡(您也可以在 MATLAB 命令窗口中输入 `roslib`)。选择 **ROS 2** 库。
 
 - Drag a **Publish** block to the model. Double-click on the block to configure the topic and message type.
 
@@ -82,7 +82,7 @@ Create a blank ROS 2 message and populate it with the x and y location for the r
 
 A ROS 2 message is represented as a _bus signal_ in Simulink. A bus signal is a bundle of Simulink signals, and can also include other bus signals (see the [Explore Simulink Bus Capabilities](https://ww2.mathworks.cn/help/simulink/slref/simulink-bus-signals.html) (Simulink) example for an overview). The ROS 2 **Blank Message** block outputs a Simulink bus signal corresponding to a ROS 2 message.
 
-> 一个 ROS 2 消息在 Simulink 中被表示为总线信号。总线信号是 Simulink 信号的一个包，也可以包含其他总线信号（参见[探索 Simulink 总线功能](https://ww2.mathworks.cn/help/simulink/slref/simulink-bus-signals.html)（Simulink）示例以获取概述）。ROS 2 **空消息**块输出一个与 ROS 2 消息对应的 Simulink 总线信号。
+> <font color=Red><b> **一个 ROS 2 消息在 Simulink 中被表示为总线信号**。总线信号是 Simulink 信号的一个包，也可以包含其他总线信号(参见[探索 Simulink 总线功能](Simulink)示例以获取概述)。ROS 2 **空消息**块输出一个与 ROS 2 消息对应的 Simulink 总线信号。</b></font>
 
 - Click **ROS Toolbox** tab in the Library Browser, or type `roslib` at the MATLAB command line. Select the **ROS 2** Library.
 
@@ -103,7 +103,7 @@ A ROS 2 message is represented as a _bus signal_ in Simulink. A bus signal is a 
 
 - Double-click on the **Bus Assignment** block. You should see x, y and z (the signals comprising a `geometry_msgs/Point` message) listed on the left. Select `??? signal1` in the right listbox and click **Remove**. Select both `X` and `Y` signals in the left listbox and click **Select**. Click **OK** to apply changes.
 
-> 双击**公交分配**块。您应该在左侧看到 x，y 和 z（组成 `geometry_msgs/Point` 消息的信号）。在右侧列表框中选择 `??? signal1` 并单击**删除**。在左侧列表框中选择 `X` 和 `Y` 信号，然后单击**选择**。单击**确定**以应用更改。
+> 双击**公交分配**块。您应该在左侧看到 x，y 和 z(组成 `geometry_msgs/Point` 消息的信号)。在右侧列表框中选择 `??? signal1` 并单击**删除**。在左侧列表框中选择 `X` 和 `Y` 信号，然后单击**选择**。单击**确定**以应用更改。
 
 ![](https://ww2.mathworks.cn/help/examples/ros/win64/GetStartedWithROS2InSimulinkExample_03.png)
 
@@ -140,7 +140,7 @@ At this point, the model is set up to publish messages to the ROS 2 network. You
 
 - While the simulation is running, type `ros2 node` `list` in the MATLAB command window. This lists all the nodes available in the ROS network, and includes a node with a name like `/untitled_90580` (the name of the model along with a random number to make it unique).
 
-> 当模拟运行时，在 MATLAB 命令窗口中输入 `ros2 node` `list`。这将列出 ROS 网络中所有可用的节点，其中包括一个名称类似 `/untitled_90580`（模型的名称加上一个随机数以使其唯一）的节点。
+> 当模拟运行时，在 MATLAB 命令窗口中输入 `ros2 node` `list`。这将列出 ROS 网络中所有可用的节点，其中包括一个名称类似 `/untitled_90580`(模型的名称加上一个随机数以使其唯一)的节点。
 
 - While the simulation is running, type `ros2 topic` `list` in the MATLAB command window. This lists all the topics available in the ROS 2 network, and it includes `/location`.
 
@@ -237,17 +237,17 @@ The first time you run the model in Simulink, the `XY` plot may look more jitter
 
 Note that the simulation **does not** work in actual or "real" time. The blocks in the model are evaluated in a loop that only simulates the progression of time, and is not intended to track actual clock time (for details, see [Simulation Loop Phase](https://ww2.mathworks.cn/help/simulink/ug/simulating-dynamic-systems.html#f7-8261) (Simulink)).
 
-> 模拟并不是以实际时间或“实时”工作。模型中的块在循环中被评估，只模拟时间的进程，而不是跟踪实际的时钟时间（有关详情，请参见 [Simulation Loop Phase](https://ww2.mathworks.cn/help/simulink/ug/simulating-dynamic-systems.html#f7-8261) (Simulink)）。
+> 模拟并不是以实际时间或“实时”工作。模型中的块在循环中被评估，只模拟时间的进程，而不是跟踪实际的时钟时间(有关详情，请参见 [Simulation Loop Phase](https://ww2.mathworks.cn/help/simulink/ug/simulating-dynamic-systems.html#f7-8261) (Simulink))。
 
 ### Modify the Model to React Only to New Messages
 
 In the above model, the **Subscribe** block outputs a message (bus signal) on every time step; if no messages have been received at all, it outputs a blank message (i.e., a message with zero values). Consequently, the `XY` coordinates are initially plotted at `(0,0)`.
 
-> 在上述模型中，“订阅”块每一时间步都会输出一条消息（总线信号）；如果一条消息都没有收到，它会输出一条空消息（即，一条值为零的消息）。因此，XY 坐标最初绘制在（0,0）。
+> 在上述模型中，“订阅”块每一时间步都会输出一条消息(总线信号)；如果一条消息都没有收到，它会输出一条空消息(即，一条值为零的消息)。因此，XY 坐标最初绘制在(0,0)。
 
 In this task, you will modify the model to use an **Enabled Subsystem**, so that it plots the location only when a new message is received (for more information, see [Using Enabled Subsystems](https://ww2.mathworks.cn/help/simulink/ug/enabled-subsystems.html) (Simulink)). A [pre-configured model](matlab:ros2GetStartedExample) is included for your convenience.
 
-> 在此任务中，您将修改模型以使用**启用子系统**，以便仅在收到新消息时才绘制位置（有关更多信息，请参阅[使用启用子系统](https://ww2.mathworks.cn/help/simulink/ug/enabled-subsystems.html)（Simulink））。 为方便起见，包括一个[预配置模型](matlab:ros2GetStartedExample)。
+> 在此任务中，您将修改模型以使用**启用子系统**，以便仅在收到新消息时才绘制位置(有关更多信息，请参阅[使用启用子系统](https://ww2.mathworks.cn/help/simulink/ug/enabled-subsystems.html)(Simulink))。 为方便起见，包括一个[预配置模型](matlab:ros2GetStartedExample)。
 
 - In the model, click and drag to select the **Bus Selector** block and **XY Graph** blocks. Right-click on the selection and select **Create Subsystem from Selection**.
 
