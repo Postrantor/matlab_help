@@ -9,7 +9,6 @@ tag:
 summary: Use Simulink blocks for ROS 2 to send and receive messages from a local ROS 2 network.
 > 使用Simulink块为ROS 2从本地ROS 2网络发送和接收消息。
 ---
-
 This example shows how to use Simulink blocks for ROS 2 to send and receive messages from a local ROS 2 network.
 
 > 这个例子展示了如何使用 Simulink 块与本地 ROS 2 网络进行消息发送和接收。

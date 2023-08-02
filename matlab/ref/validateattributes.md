@@ -6,12 +6,11 @@ date: 2023-07-20 10:11:08
 tag: 
 summary: 此 MATLAB 函数 验证数组 A 是否属于至少一个指定的类（或其子类）并具有所有指定的属性。
 ---
-
 ## 说明
 
 [示例](https://ww2.mathworks.cn/help/matlab/ref/validateattributes.html#btnqd1y-2)
 
-`` validateattributes([`A`](#btnqd0h-A),[`classes`](#btnqd0h-classes),[`attributes`](#btnqd0h-attributes)) `` 验证数组 `A` 是否属于至少一个指定的类（或其子类）并具有所有指定的属性。如果 `A` 不符合条件，MATLAB® 将引发错误，并显示一条格式化的错误消息。否则，`validateattributes` 将完成并且不显示任何输出。
+``validateattributes([`A`](#btnqd0h-A),[`classes`](#btnqd0h-classes),[`attributes`](#btnqd0h-attributes))`` 验证数组 `A` 是否属于至少一个指定的类（或其子类）并具有所有指定的属性。如果 `A` 不符合条件，MATLAB® 将引发错误，并显示一条格式化的错误消息。否则，`validateattributes` 将完成并且不显示任何输出。
 
 ## 示例
 
@@ -197,7 +196,7 @@ MATLAB:findVolume:invalidType
 
 输入，指定为任何类型的数组。
 
-**数据类型：** `single` | `double` | `int8` | `int16` | `int32` | `int64` | `uint8` | `uint16` | `uint32` | `uint64` | `logical` | `char` | `string` | `struct` | `cell` | `function_handle`  
+**数据类型：** `single` | `double` | `int8` | `int16` | `int32` | `int64` | `uint8` | `uint16` | `uint32` | `uint64` | `logical` | `char` | `string` | `struct` | `cell` | `function_handle`
 **复数支持：** 是
 
 ### `classes` — 有效数据类型
@@ -279,7 +278,6 @@ MATLAB:findVolume:invalidType
 
 
   ```
-
 - 半精度数据类型支持 `scalar` 和 `real` 属性。
 
 ### 基于线程的环境

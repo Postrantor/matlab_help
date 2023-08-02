@@ -6,12 +6,11 @@ date: 2023-07-19 10:28:16
 tag: #版本管理 #simulink
 summary: Simulink.MDLInfo 对象从 SLX、SLXP 或 MDL 文件中提取信息，而不将其加载到内存中。
 ---
-
 # Simulink.MDLInfo
 
 在不加载文件的情况下提取 SLX、SLXP 或 MDL 文件信息
 
-[全页展开](<javascript:void(0);>)
+[全页展开](javascript:void(0);)
 
 ## 说明
 
@@ -33,7 +32,7 @@ summary: Simulink.MDLInfo 对象从 SLX、SLXP 或 MDL 文件中提取信息，�
 
 ### 输入参数
 
-[全部展开](<javascript:void(0);>)
+[全部展开](javascript:void(0);)
 
 ### `file` — SLX、SLXP 或 MDL 文件的名称
 
@@ -57,7 +56,7 @@ SLX、SLXP 或 MDL 文件的名称，指定为字符向量或字符串标量。
 
 ## 属性
 
-[全部展开](<javascript:void(0);>)
+[全部展开](javascript:void(0);)
 
 ### 文件名和内容
 
@@ -137,7 +136,6 @@ true 或 false 结果，以数据类型 `logical` 的 `1` 或 `0` 形式返回�
   help 'mymodelname'
 
   ```
-
 - 要查看一个打开模型的说明，请在 “模型属性” 对话框中打开**说明**选项卡。
 
 **数据类型：** `char`
@@ -243,7 +241,7 @@ true 或 false 结果，以数据类型 `logical` 的 `1` 或 `0` 形式返回�
 
 ## 示例
 
-[全部折叠](<javascript:void(0);>)
+[全部折叠](javascript:void(0);)
 
 ### 获取模型信息
 

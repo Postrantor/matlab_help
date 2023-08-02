@@ -28,24 +28,19 @@ summary: RTW.BuildInfo 对象包含用于编译和链接生成的代码的信息
 
 `` `buildInformation` = RTW.BuildInfo`` 返回一个编译信息对象。您可以使用该对象来指定用于编译和链接生成的代码的信息。例如：
 
-*   编译器选项
-    
-*   预处理器标识符定义
-    
-*   链接器选项
-    
-*   源文件和路径
-    
-*   包含文件和路径
-    
-*   预编译的外部库
-    
+* 编译器选项
+* 预处理器标识符定义
+* 链接器选项
+* 源文件和路径
+* 包含文件和路径
+* 预编译的外部库
 
 ## 属性
 
 [全部展开](javascript:void(0);)
 
-### `ComponentName`  — 组件名称  
+### `ComponentName`  — 组件名称
+
 字符向量 | 字符串
 
 生成的代码组件的名称。
@@ -133,4 +128,4 @@ buildResult1 = codebuild(pwd, buildInfo, tmf)
 
 ### 主题
 
-*   [Customize Post-Code-Generation Build Processing](../ug/customizing-post-code-generation-build-processing.html)
+* [Customize Post-Code-Generation Build Processing](../ug/customizing-post-code-generation-build-processing.html)

@@ -6,7 +6,6 @@ date: 2023-07-20 09:05:47
 tag:
 summary: Publish and subscribe to topics in a ROS network.
 ---
-
 This example shows how to publish and subscribe to topics in a ROS 2 network.
 
 > 这个例子展示了如何在 ROS 2 网络中发布和订阅主题。
@@ -62,7 +61,7 @@ Use `ros2 topic list` to see which topics are available.
 
 Assume you want to subscribe to the `/scan` topic. Use `ros2subscriber` to subscribe to the `/scan` topic. Specify the name of the node with the subscriber. If the topic already exists in the ROS 2 network, `ros2subscriber` detects its message type automatically, so you do not need to specify it.
 
-> 假设你想订阅`/scan`主题。使用`ros2subscriber`订阅`/scan`主题。指定带订阅者的节点的名称。如果该主题已经存在于 ROS 2 网络中，`ros2subscriber`会自动检测其消息类型，因此您不需要指定它。
+> 假设你想订阅 `/scan` 主题。使用 `ros2subscriber` 订阅 `/scan` 主题。指定带订阅者的节点的名称。如果该主题已经存在于 ROS 2 网络中，`ros2subscriber` 会自动检测其消息类型，因此您不需要指定它。
 
 ```
 detectNode = ros2node("/detection");
@@ -74,7 +73,7 @@ pause(5)
 
 Use `receive` to wait for a new message. Specify a timeout of 10 seconds. The output `scanData` contains the received message data. `status` indicates whether a message was received successfully and `statustext` provides additional information about the `status`.
 
-> 使用`接收`等待新消息，设置超时时间为 10 秒。输出`scanData`包含接收到的消息数据，`status`表示是否成功接收到消息，`statustext`提供有关`status`的附加信息。
+> 使用 `接收` 等待新消息，设置超时时间为 10 秒。输出 `scanData` 包含接收到的消息数据，`status` 表示是否成功接收到消息，`statustext` 提供有关 `status` 的附加信息。
 
 ```
 [scanData,status,statustext] = receive(laserSub,10);
@@ -83,7 +82,7 @@ Use `receive` to wait for a new message. Specify a timeout of 10 seconds. The ou
 
 You can now remove the subscriber `laserSub` and the node associated to it.
 
-> 你现在可以删除订阅者`laserSub`及其相关节点。
+> 你现在可以删除订阅者 `laserSub` 及其相关节点。
 
 ```
 clear laserSub
@@ -95,11 +94,11 @@ clear detectNode
 
 Instead of using `receive` to get data, you can specify a function to be called when a new message is received. This allows other MATLAB code to execute while the subscriber is waiting for new messages. Callbacks are essential if you want to use multiple subscribers.
 
-> 代替使用`接收`来获取数据，您可以指定一个函数，以便在收到新消息时调用该函数。这样，订阅者等待新消息时，其他 MATLAB 代码可以执行。如果要使用多个订阅者，回调是必不可少的。
+> 代替使用 `接收` 来获取数据，您可以指定一个函数，以便在收到新消息时调用该函数。这样，订阅者等待新消息时，其他 MATLAB 代码可以执行。如果要使用多个订阅者，回调是必不可少的。
 
 Subscribe to the `/pose` topic, using the callback function `exampleHelperROS2PoseCallback`, which takes a received message as the input. One way of sharing data between your main workspace and the callback function is to use global variables. Define two global variables `pos` and `orient`.
 
-> 订阅`/pose`主题，使用回调函数`exampleHelperROS2PoseCallback`，它将接收到的消息作为输入。在主工作空间和回调函数之间共享数据的一种方法是使用全局变量。定义两个全局变量`pos`和`orient`。
+> 订阅 `/pose` 主题，使用回调函数 `exampleHelperROS2PoseCallback`，它将接收到的消息作为输入。在主工作空间和回调函数之间共享数据的一种方法是使用全局变量。定义两个全局变量 `pos` 和 `orient`。
 
 ```
 controlNode = ros2node("/base_station");
@@ -112,7 +111,7 @@ global orient
 
 The global variables `pos` and `orient` are assigned in the `exampleHelperROS2PoseCallback` function when new message data is received on the `/pose` topic.
 
-> 全局变量`pos`和`orient`在接收到`/pose`主题的新消息数据时，会在`exampleHelperROS2PoseCallback`函数中被赋值。
+> 全局变量 `pos` 和 `orient` 在接收到 `/pose` 主题的新消息数据时，会在 `exampleHelperROS2PoseCallback` 函数中被赋值。
 
 ```
 function exampleHelperROS2PoseCallback(message)
@@ -147,7 +146,7 @@ Wait a moment for the network to publish another `/pose` message. Display the up
 
 If you type in `pos` and `orient` a few times in the command line you can see that the values are continuously updated.
 
-> 如果你在命令行中多次输入`pos`和`orient`，你会发现这些值会不断更新。
+> 如果你在命令行中多次输入 `pos` 和 `orient`，你会发现这些值会不断更新。
 
 Stop the pose subscriber by clearing the subscriber variable
 
@@ -165,7 +164,7 @@ _Note_: There are other ways to extract information from callback functions besi
 
 Create a publisher that sends ROS 2 string messages to the `/chatter` topic.
 
-> 创建一个发布者，将 ROS 2 字符串消息发送到`/chatter`主题。
+> 创建一个发布者，将 ROS 2 字符串消息发送到 `/chatter` 主题。
 
 ```
 chatterPub = ros2publisher(node_1,"/chatter","std_msgs/String");
@@ -182,7 +181,7 @@ chatterMsg.data = 'hello world';
 
 Use `ros2 topic list` to verify that the `/chatter` topic is available in the ROS 2 network.
 
-> 使用`ros2 topic list`来验证 ROS 2 网络中是否有`/chatter`主题。
+> 使用 `ros2 topic list` 来验证 ROS 2 网络中是否有 `/chatter` 主题。
 
 ```
 /chatter
@@ -196,7 +195,7 @@ Use `ros2 topic list` to verify that the `/chatter` topic is available in the RO
 
 Define a subscriber for the `/chatter` topic. `exampleHelperROS2ChatterCallback` is called when a new message is received, and displays the string content in the message.
 
-> 定义一个订阅者用于`/chatter`主题。当收到新消息时，将调用`exampleHelperROS2ChatterCallback`，并显示消息中的字符串内容。
+> 定义一个订阅者用于 `/chatter` 主题。当收到新消息时，将调用 `exampleHelperROS2ChatterCallback`，并显示消息中的字符串内容。
 
 ```
 chatterSub = ros2subscriber(node_2,"/chatter",@exampleHelperROS2ChatterCallback)
@@ -222,7 +221,7 @@ chatterSub =
 
 Publish a message to the `/chatter` topic. Observe that the string is displayed by the subscriber callback.
 
-> 发布一条消息到`/chatter`主题。观察订阅者回调显示的字符串。
+> 发布一条消息到 `/chatter` 主题。观察订阅者回调显示的字符串。
 
 ```
 send(chatterPub,chatterMsg)
@@ -232,13 +231,13 @@ pause(3)
 
 The `exampleHelperROS2ChatterCallback` function was called when the subscriber received the string message.
 
-> 当订阅者收到字符串消息时，将调用`exampleHelperROS2ChatterCallback`函数。
+> 当订阅者收到字符串消息时，将调用 `exampleHelperROS2ChatterCallback` 函数。
 
 ### Disconnect From ROS 2 Network
 
 Remove the sample nodes, publishers and subscribers from the ROS 2 network. Also clear the global variables `pos` and `orient`
 
-> 从 ROS 2 网络中移除样本节点、发布者和订阅者。同时清除全局变量`pos`和`orient`。
+> 从 ROS 2 网络中移除样本节点、发布者和订阅者。同时清除全局变量 `pos` 和 `orient`。
 
 ```
 clear global pos orient

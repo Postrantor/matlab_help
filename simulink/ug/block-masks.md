@@ -15,16 +15,11 @@ summary: 了解有关封装和何时封装模块的基础知识。
 
 封装 Simulink® 模块可以：
 
-*   在模块上显示有意义的图标
-    
-*   为模块提供自定义对话框
-    
-*   提供一个对话框，只允许您访问底层模块的所选参数
-    
-*   提供特定于封装模块的用户自定义说明
-    
-*   使用 MATLAB® 代码初始化参数
-    
+* 在模块上显示有意义的图标
+* 为模块提供自定义对话框
+* 提供一个对话框，只允许您访问底层模块的所选参数
+* 提供特定于封装模块的用户自定义说明
+* 使用 MATLAB® 代码初始化参数
 
 请考虑代表直线方程 `y = mx + b` 的模型 [masking_example](matlab:open_system([matlabroot '/examples/simulink_masking/main/slexMaskingExamples']))。
 
@@ -46,21 +41,15 @@ summary: 了解有关封装和何时封装模块的基础知识。
 
 有关封装的示例，请参阅 [Simulink 封装示例](matlab:openExample([matlabroot '/examples/simulink_masking/main/SimulinkMaskingDemoExample']))。这些示例按类型组合。在示例模型中：
 
-*   要查看封装定义，请双击 View Mask 模块。
-    
-*   要查看封装对话框，请双击该模块。
-    
+* 要查看封装定义，请双击 View Mask 模块。
+* 要查看封装对话框，请双击该模块。
 
 极少数模块不能封装，示例如下：
 
-*   Scope 模块
-    
-*   Simulink Function 模块
-    
-*   Initialize Function、Terminate Function 和 Reset Function 模块
-    
-*   Gauge 模块
-    
+* Scope 模块
+* Simulink Function 模块
+* Initialize Function、Terminate Function 和 Reset Function 模块
+* Gauge 模块
 
 ### 封装术语
 
@@ -68,11 +57,11 @@ summary: 了解有关封装和何时封装模块的基础知识。
 
 ## 相关主题
 
-*   [创建模块封装](https://ww2.mathworks.cn/help/simulink/block-masks.html)
-*   [创建简单封装](https://ww2.mathworks.cn/help/simulink/ug/how-to-mask-a-block.html)
-*   [封装编辑器概述](https://ww2.mathworks.cn/help/simulink/gui/mask-editor-overview.html)
-*   [设置封装参数](matlab:open_system([matlabroot '/examples/simulink_masking/main/slexMaskParameterOptionsExample']))
-*   [创建封装：封装基础知识（3 分 46 秒）](https://www.mathworks.com/videos/creating-a-mask--masking-fundamentals-1480968643715.html)
+* [创建模块封装](https://ww2.mathworks.cn/help/simulink/block-masks.html)
+* [创建简单封装](https://ww2.mathworks.cn/help/simulink/ug/how-to-mask-a-block.html)
+* [封装编辑器概述](https://ww2.mathworks.cn/help/simulink/gui/mask-editor-overview.html)
+* [设置封装参数](matlab:open_system([matlabroot '/examples/simulink_masking/main/slexMaskParameterOptionsExample']))
+* [创建封装：封装基础知识（3 分 46 秒）](https://www.mathworks.com/videos/creating-a-mask--masking-fundamentals-1480968643715.html)
 
 本页内容对您有帮助吗？
 
@@ -88,7 +77,7 @@ Unrated
 
 5 stars
 
- Unrated  1 star  2 stars  3 stars  4 stars  5 stars
+Unrated  1 star  2 stars  3 stars  4 stars  5 stars
 
 您点击的链接对应于以下 MATLAB 命令：
 

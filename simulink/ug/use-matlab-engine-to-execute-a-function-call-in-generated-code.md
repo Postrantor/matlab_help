@@ -7,7 +7,6 @@ date: 2023-07-26 14:17:29
 tag: 
 summary: 如果代码生成不支持某个函数，请将其声明为外部函数以在 MATLAB 中执行。
 ---
-
 ## 使用 MATLAB 引擎在生成的代码中执行函数调用
 
 在 MATLAB® 代码中处理对函数 `foo` 的调用时，代码生成器会找到 `foo` 的定义并为其函数体生成代码。**在某些情况下，您可能希望绕过代码生成，而是使用 MATLAB 引擎来执行调用。** 使用 `coder.extrinsic('foo')` 声明对 `foo` 的调用不生成代码，而是使用 MATLAB 引擎执行。在此上下文中，`foo` 称为外部函数。在执行期间，仅当 MATLAB 引擎可用时，此功能才可用。这种情况的示例包括 MEX 函数的执行、Simulink® 仿真或代码生成时的函数调用（也称为*编译时*）。
@@ -77,7 +76,6 @@ y = min(N, D);
   ```
 
   这里，函数 `rat` 每次在主函数 `foo` 内调用时都是外部函数，但函数 `min` 只有在局部函数 `mymin` 内调用时才是外部函数。
-
 - 请使用 [`feval`](https://ww2.mathworks.cn/help/matlab/ref/feval.html) 调用 MATLAB 函数，而不是使用 `coder.extrinsic` 构造。下一节将介绍这种方法。
 
 #### 对非静态方法进行外部声明
@@ -232,7 +230,6 @@ Error using codegen
   - 更改警告状态
   - 更改 MATLAB 预设
   - 更改 Simulink 参数
-
 - 代码生成器不支持使用 `coder.extrinsic` 来调用位于私有文件夹中的函数。
 - 代码生成器不支持使用 `coder.extrinsic` 来调用局部函数。
 - 您可以调用最多具有 64 个输入和 64 个输出的外部函数。

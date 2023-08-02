@@ -9,7 +9,6 @@ tag:
 summary: Use Simulink to control a simulated robot running in a Gazebo robot simulator over ROS 2 network.
 > 使用Simulink控制在ROS 2网络上运行的Gazebo机器人模拟器中的模拟机器人。
 ---
-
 This example shows you how to use Simulink® to control a simulated robot running in a Gazebo® robot simulator over ROS 2 network.
 
 > 这个例子向您展示了如何使用 Simulink® 通过 ROS 2 网络控制在 Gazebo® 机器人模拟器中运行的模拟机器人。
@@ -22,7 +21,7 @@ In this example, you will run a model that implements a simple closed-loop propo
 
 The following diagram summarizes the interaction between Simulink and the robot simulator (the arrows in the diagram indicate ROS 2 message transmission). The `/odom` topic conveys location information, and the `/cmd_vel` topic conveys velocity commands.
 
-> 以下图表总结了 Simulink 与机器人模拟器之间的交互（图中的箭头表示 ROS 2 消息传输）。 `/odom`主题传输位置信息，而`/cmd_vel`主题传输速度指令。
+> 以下图表总结了 Simulink 与机器人模拟器之间的交互（图中的箭头表示 ROS 2 消息传输）。 `/odom` 主题传输位置信息，而 `/cmd_vel` 主题传输速度指令。
 
 ![](https://ww2.mathworks.cn/help/examples/ros/win64/FeedbackControlOfAROS2enabledRobotExample_01.png)
 
@@ -42,11 +41,11 @@ In this task, you will start a ROS-based simulator for a differential-drive robo
 
 - Click the **ROS Bridge** icon to start the ROS bridge to relay messages between Simulink ROS 2 node and Turtlebot3 ROS-enabled robot.
 
-> 点击**ROS Bridge**图标启动 ROS 桥接，以在 Simulink ROS 2 节点和 Turtlebot3 ROS 启用机器人之间传递消息。
+> 点击 **ROS Bridge** 图标启动 ROS 桥接，以在 Simulink ROS 2 节点和 Turtlebot3 ROS 启用机器人之间传递消息。
 
 - In MATLAB on your host machine, set the proper domain ID for the ROS 2 network using the `'ROS_DOMAIN_ID'` environment variable to `25` to match the robot simulator ROS bridge settings and run `ros2 topic list` to verify that the topics from the robot simulator are visible in MATLAB.
 
-> 在您的主机机器上的 MATLAB 中，使用`'ROS_DOMAIN_ID'`环境变量将 ROS 2 网络的正确域 ID 设置为`25`，以匹配机器人模拟器 ROS 桥接设置，然后运行`ros2 topic list`以验证机器人模拟器中的主题是否在 MATLAB 中可见。
+> 在您的主机机器上的 MATLAB 中，使用 `'ROS_DOMAIN_ID'` 环境变量将 ROS 2 网络的正确域 ID 设置为 `25`，以匹配机器人模拟器 ROS 桥接设置，然后运行 `ros2 topic list` 以验证机器人模拟器中的主题是否在 MATLAB 中可见。
 
 ```
 setenv('ROS_DOMAIN_ID','25')
@@ -98,7 +97,6 @@ Note that there are four tunable parameters in the model (indicated by colored b
 > 注意，模型中有四个可调参数（由彩色块标明）。
 
 - **Desired Position** (at top level of model): The desired location in (X,Y) coordinates
-
 - **Distance Threshold**: The robot is stopped if it is closer than this distance from the desired location
 
 > 距离阈值：如果机器人离所需位置更近，则停止运行。
@@ -119,10 +117,9 @@ In this task, you will configure Simulink to communicate with ROS-enabled robot 
 To configure the network settings for ROS 2.
 
 - Under the **Simulation** tab, in **PREPARE**, select **ROS Toolbox > ROS Network**.
-
 - In **Configure ROS Network Addresses**, set the ROS 2 Domain ID value to _25_ and set the ROS 2 RMW Implementation as `rmw_fastrtps_cpp`.
 
-> 在**配置 ROS 网络地址**中，将 ROS 2 域 ID 值设置为*25*，并将 ROS 2 RMW 实现设置为`rmw_fastrtps_cpp`。
+> 在**配置 ROS 网络地址**中，将 ROS 2 域 ID 值设置为 *25*，并将 ROS 2 RMW 实现设置为 `rmw_fastrtps_cpp`。
 
 - Click _OK_ to apply changes and close the dialog.
 
@@ -135,10 +132,9 @@ To run the model.
 > 将窗口位置调整到您的屏幕上，以便您可以同时观察 Simulink 模型和机器人模拟器。
 
 - Click the Play button in Simulink to start simulation.
-
 - While the simulation is running, double-click on the **Desired Position** block and change the Constant value to `[2 3]`. Observe that the robot changes its heading.
 
-> 当模拟运行时，双击**期望位置**块，将常数值改为`[2 3]`。观察机器人改变其航向。
+> 当模拟运行时，双击**期望位置**块，将常数值改为 `[2 3]`。观察机器人改变其航向。
 
 - While the simulation is running, open the **Proportional Controller** subsystem and double-click on the **Linear Velocity (slider)** block. Move the slider to 2. Observe the increase in robot velocity.
 
@@ -151,10 +147,9 @@ To run the model.
 In this task, you will observe the timing and rate of incoming messages.
 
 - Click the Play button in Simulink to start simulation.
-
 - Open the Scope block. Observe that the **IsNew** output of the **Subscribe** block is always zero, indicating that no messages are being received for the /odom topic. The horizontal axis of the plot indicates simulation time.
 
-> 打开 Scope 块。观察**Subscribe**块的**IsNew**输出总是为零，表明没有收到/odom 主题的消息。绘图的水平轴表示模拟时间。
+> 打开 Scope 块。观察 **Subscribe** 块的 **IsNew** 输出总是为零，表明没有收到/odom 主题的消息。绘图的水平轴表示模拟时间。
 
 - Start Gazebo Simulator in ROS network and start ROS Bridge in ROS 2, so that ROS 2 network able receive messages published by Gazebo Simulator.
 
@@ -162,13 +157,13 @@ In this task, you will observe the timing and rate of incoming messages.
 
 - In the Scope display, observe that the **IsNew** output has the value 1 at an approximate rate of 20 times per second, in elapsed wall-clock time.
 
-> 在范围显示中，观察到**IsNew**输出在大约每秒 20 次的时间间隔内的值为 1。
+> 在范围显示中，观察到 **IsNew** 输出在大约每秒 20 次的时间间隔内的值为 1。
 
 ![](https://ww2.mathworks.cn/help/examples/ros/win64/FeedbackControlOfAROS2enabledRobotExample_08.png)
 
 The synchronization with wall-clock time is due to the **Simulation Rate Control** block. Typically, a Simulink simulation executes in a free-running loop whose speed depends on complexity of the model and computer speed (see [Simulation Loop Phase](https://www.mathworks.com/help/simulink/ug/simulating-dynamic-systems.html#f7-8261) (Simulink)). The **Simulation Rate Control** block attempts to regulate Simulink execution so that each update takes 0.02 seconds in wall-clock time when possible (this is equal to the fundamental sample time of the model). See the comments inside the block for more information.
 
-> 由于模拟率控制块，与墙上时钟的同步是必要的。通常，Simulink 模拟以自由运行的循环执行，其速度取决于模型的复杂性和计算机速度（参见[Simulation Loop Phase](https://www.mathworks.com/help/simulink/ug/simulating-dynamic-systems.html#f7-8261)（Simulink））。模拟率控制块试图调节 Simulink 执行，使每次更新在可能的情况下都要花 0.02 秒的墙上时间（这等于模型的基本采样时间）。有关更多信息，请参阅块内的注释。
+> 由于模拟率控制块，与墙上时钟的同步是必要的。通常，Simulink 模拟以自由运行的循环执行，其速度取决于模型的复杂性和计算机速度（参见 [Simulation Loop Phase](https://www.mathworks.com/help/simulink/ug/simulating-dynamic-systems.html#f7-8261)（Simulink））。模拟率控制块试图调节 Simulink 执行，使每次更新在可能的情况下都要花 0.02 秒的墙上时间（这等于模型的基本采样时间）。有关更多信息，请参阅块内的注释。
 
 In addition, the Enabled subsystems for the Proportional Controller and the Command Velocity Publisher ensure that the model only reacts to genuinely new messages. If enabled subsystems were not used, the model would repeatedly process the same (most-recently received) message over and over, leading to wasteful processing and redundant publishing of command messages.
 

@@ -15,14 +15,10 @@ The code generator represents time counters as unsigned integers. The word size 
 
 The number of bits that a time counter uses depends on the setting of the **Application lifespan (days)** parameter. For example, if a time counter increments at a rate of 1 kHz, to avoid an overflow, the counter has the following number of bits:
 
-*   Lifespan < 0.25 sec: 8 bits
-    
-*   Lifespan < 1 min: 16 bits
-    
-*   Lifespan < 49 days: 32 bits
-    
-*   Lifespan > 50 days: 64 bits
-    
+* Lifespan < 0.25 sec: 8 bits
+* Lifespan < 1 min: 16 bits
+* Lifespan < 49 days: 32 bits
+* Lifespan > 50 days: 64 bits
 
 A 64-bit time counter does not overflow for 590 million years.
 
@@ -36,12 +32,9 @@ The model consists of three subsystems `SS1`, `SS2`, and `SS3`. Open the Model C
 
 The three subsystems contain a discrete-time integrator that requires elapsed time as input to compute its output value. The subsystems vary as follows:
 
-*   SS1 - Clocked at 1 kHz. Does not require a time counter. **Sample time type** parameter for trigger port is set to `periodic`. Elapsed time is inlined as 0.001.
-    
-*   SS2 - Clocked at 100 Hz. Requires a time counter. Based on a lifespan of 1 day, a 32-bit counter stores the elapsed time.
-    
-*   SS3 - Clocked at 0.5 Hz. Requires a time counter. Based on a lifespan of 1 day, a 16-bit counter stores the elapsed time.
-    
+* SS1 - Clocked at 1 kHz. Does not require a time counter. **Sample time type** parameter for trigger port is set to `periodic`. Elapsed time is inlined as 0.001.
+* SS2 - Clocked at 100 Hz. Requires a time counter. Based on a lifespan of 1 day, a 32-bit counter stores the elapsed time.
+* SS3 - Clocked at 0.5 Hz. Requires a time counter. Based on a lifespan of 1 day, a 16-bit counter stores the elapsed time.
 
 **Simulate the Model**
 
@@ -50,9 +43,7 @@ Simulate the model. By default, the model is configured to show sample times in 
 **Generate Code and Report**
 
 1. Create a temporary folder for the build and inspection process.
-
 2. Configure the model for the code generator to use the GRT system target file and a lifespan of `inf` days.
-
 3. Build the model.
 
 ```
@@ -149,7 +140,6 @@ Four 32-bit unsigned integers, `clockTick1` , `clockTickH1` , `clockTick2` , and
 **Enable Optimization and Regenerate Code**
 
 1. Reconfigure the model to set the lifespan to 1 day.
-
 2. Build the model.
 
 ```
@@ -239,10 +229,8 @@ extern RT_MODEL_rtwdemo_abstime_T *const rtwdemo_abstime_M;
 
 The new setting for the **Application lifespan (days)** parameter instructs the code generator to set aside less memory for the time counters. The regenerated code includes:
 
-*   32-bit unsigned integer, `clockTick1`, for storing the elapsed time of the task for `SS2`
-    
-*   16-bit unsigned integer, `clockTick2`, for storing the elapsed time of the task for `SS3`
-    
+* 32-bit unsigned integer, `clockTick1`, for storing the elapsed time of the task for `SS2`
+* 16-bit unsigned integer, `clockTick2`, for storing the elapsed time of the task for `SS3`
 
 **Related Information**
 
@@ -312,18 +300,12 @@ The model is configured to display sample-time colors upon diagram update. To se
 
 Basis of operation for data transfers between tasks:
 
-*   Data transitions occur between a single reading task and a single writing task.
-    
-*   A read or write of a byte sized variable is atomic.
-    
-*   When two tasks interact through a data transition, only one of them can preempt the other.
-    
-*   For periodic tasks, the faster rate task has higher priority than the slower rate task; the faster rate task always preempts the slower rate task.
-    
-*   Tasks run on a single processor. Time slicing is not allowed.
-    
-*   Processes do not crash and restart (especially while data is being transferred between tasks)
-    
+* Data transitions occur between a single reading task and a single writing task.
+* A read or write of a byte sized variable is atomic.
+* When two tasks interact through a data transition, only one of them can preempt the other.
+* For periodic tasks, the faster rate task has higher priority than the slower rate task; the faster rate task always preempts the slower rate task.
+* Tasks run on a single processor. Time slicing is not allowed.
+* Processes do not crash and restart (especially while data is being transferred between tasks)
 
 ### Multirate Modeling in Multitasking Mode (VxWorks® OS)
 
@@ -358,18 +340,12 @@ This model shows the differences in the operation modes of the Rate Transition b
 
 Basis of operation for data transfers between tasks:
 
-*   Data transitions occur between a single reading task and a single writing task.
-    
-*   A read or write of a byte sized variable is atomic.
-    
-*   When two tasks interact through a data transition, only one of them can preempt the other.
-    
-*   For periodic tasks, the faster rate task has higher priority than the slower rate task; the faster rate task always preempts the slower rate task.
-    
-*   All tasks run on a single processor. Time slicing is not allowed.
-    
-*   Processes do not crash/restart (especially while data is being transferred between tasks).
-    
+* Data transitions occur between a single reading task and a single writing task.
+* A read or write of a byte sized variable is atomic.
+* When two tasks interact through a data transition, only one of them can preempt the other.
+* For periodic tasks, the faster rate task has higher priority than the slower rate task; the faster rate task always preempts the slower rate task.
+* All tasks run on a single processor. Time slicing is not allowed.
+* Processes do not crash/restart (especially while data is being transferred between tasks).
 
 **Model `rtwdemo_ratetrans`**
 
@@ -387,51 +363,36 @@ Model `rtwdemo_ratetrans` shows the differences in the operation modes of the fo
 
 Determinism and data integrity (fast to slow transition):
 
-*   The block output is used as a persistent data buffer.
-    
-*   Data is written to output at slower rate but done during the faster rate context.
-    
-*   Data as seen by the slower rate is always the value when both the faster and slower rate last executed. Any subsequent steps by the faster rate (and associated data updates) while the slower rate is running are not seen by the slower rate.
-    
+* The block output is used as a persistent data buffer.
+* Data is written to output at slower rate but done during the faster rate context.
+* Data as seen by the slower rate is always the value when both the faster and slower rate last executed. Any subsequent steps by the faster rate (and associated data updates) while the slower rate is running are not seen by the slower rate.
 
 **Rate Transition Block `DetAndIntegS2F`**
 
 Determinism and data integrity (slow to fast transition):
 
-*   Uses two persistent data buffers, an internal buffer and the blocks output.
-    
-*   The internal buffer is copied to the output at the slower rate but done during the faster rate context.
-    
-*   The internal buffer is written at the slower rate and during the slower rate context.
-    
-*   The data that Fast rate sees is always delayed, i.e. data is from the previous step of the slow rate code.
-    
+* Uses two persistent data buffers, an internal buffer and the blocks output.
+* The internal buffer is copied to the output at the slower rate but done during the faster rate context.
+* The internal buffer is written at the slower rate and during the slower rate context.
+* The data that Fast rate sees is always delayed, i.e. data is from the previous step of the slow rate code.
 
 **Rate Transition Block `IntegOnlyF2S`**
 
 Data integrity only (fast to slow transition):
 
-*   The block output is used as a persistent data buffer.
-    
-*   Data is written to buffer during the faster rate context if a flag indicates it not in the process of being read.
-    
-*   The flag is set and data is copied from the buffer to output at the slow rate, the flag is then cleared. This is an additional copy as compared to the deterministic case.
-    
-*   Data as seen by the slower rate can be from a more recent step of the faster rate than from when the slower rate and faster rate both executed.
-    
+* The block output is used as a persistent data buffer.
+* Data is written to buffer during the faster rate context if a flag indicates it not in the process of being read.
+* The flag is set and data is copied from the buffer to output at the slow rate, the flag is then cleared. This is an additional copy as compared to the deterministic case.
+* Data as seen by the slower rate can be from a more recent step of the faster rate than from when the slower rate and faster rate both executed.
 
 **Rate Transition Block `IntegOnlyS2F`**
 
 Data integrity only (slow to fast transition):
 
-*   Uses two persistent data buffers, both are internal buffers.
-    
-*   One of the 2 buffers is always copied to the output at faster rate.
-    
-*   One of the 2 buffers is written at the slower rate and during the slower rate context, then the active buffer is switched.
-    
-*   The data as seen by the faster rate can be more recent than for the deterministic case. Specifically, when both the slower and faster rate have their hits, the faster rate will see a previous value from the slower rate. But, subsequent steps for the faster rate may see an updated value (when the slower rate updates the non-active buffer and switches the active buffer flag.
-    
+* Uses two persistent data buffers, both are internal buffers.
+* One of the 2 buffers is always copied to the output at faster rate.
+* One of the 2 buffers is written at the slower rate and during the slower rate context, then the active buffer is switched.
+* The data as seen by the faster rate can be more recent than for the deterministic case. Specifically, when both the slower and faster rate have their hits, the faster rate will see a previous value from the slower rate. But, subsequent steps for the faster rate may see an updated value (when the slower rate updates the non-active buffer and switches the active buffer flag.
 
 **Rate Transition Block `NoneF2S`**
 
@@ -449,9 +410,9 @@ bdclose('rtwdemo_ratetrans');
 
 ## Related Topics
 
-*   [Time-Based Scheduling and Code Generation](https://www.mathworks.com/help/rtw/ug/time-based-scheduling-and-code-generation.html)
-*   [Modeling for Single-Tasking Execution](https://www.mathworks.com/help/rtw/ug/modeling-for-single-tasking-execution.html)
-*   [Modeling for Multitasking Execution](https://www.mathworks.com/help/rtw/ug/modeling-for-multitasking-execution.html)
+* [Time-Based Scheduling and Code Generation](https://www.mathworks.com/help/rtw/ug/time-based-scheduling-and-code-generation.html)
+* [Modeling for Single-Tasking Execution](https://www.mathworks.com/help/rtw/ug/modeling-for-single-tasking-execution.html)
+* [Modeling for Multitasking Execution](https://www.mathworks.com/help/rtw/ug/modeling-for-multitasking-execution.html)
 
 You have a modified version of this example. Do you want to open this example with your edits?
 
@@ -469,7 +430,7 @@ Unrated
 
 5 stars
 
- Unrated  1 star  2 stars  3 stars  4 stars  5 stars
+Unrated  1 star  2 stars  3 stars  4 stars  5 stars
 
 You clicked a link that corresponds to this MATLAB command:
 

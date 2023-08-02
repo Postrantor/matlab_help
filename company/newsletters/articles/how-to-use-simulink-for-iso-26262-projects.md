@@ -8,7 +8,6 @@ summary: This article presents the TÜV SÜD approved workflow for using Simulin
 > 本文介绍了TÜV SÜD认可的使用Simulink进行ISO 26262的工作流程。涵盖的主题包括......
 author: By Tom Erkkinen, MathWorks
 ---
-
 Automotive engineers working on safety-related, embedded systems for traditional and autonomous vehicles are looking for efficient ways to achieve the process rigor imposed by ISO® 26262 [1], a functional safety standard for road vehicle development.
 
 > 汽车工程师正在为传统和自动驾驶汽车的安全相关嵌入式系统寻找有效的方法来实现 ISO® 26262[1]规定的过程严格性，这是一个道路车辆开发的功能安全标准。
@@ -91,7 +90,7 @@ ISO 26262 recommends methods for various activities based on Automotive Safety I
 
 You start the safety-related development process by authoring functional and safety requirements. ISO 26262 recommends that you verify the software architecture design using “bi-directional traceability between the software architectural design and the software safety requirements.” To achieve this, you can use Requirements Toolbox™ to author and trace requirements to models, tests, and code. Requirements Toolbox supports bidirectional tracing for other tools, including Microsoft® Word®, Microsoft Excel®, and IBM® Rational® DOORS®. Further, you can [use Simulink and Requirements Toolbox to create formal and unambiguous requirement specifications.](https://www.mathworks.com/help/slrequirements/ug/use-requirements-table-block.html) The implementation and verification status of the requirements is monitored and managed within Requirements Toolbox. Requirement links can appear in the generated code (Figure 3).
 
-> 您可以通过编写功能和安全要求来启动安全相关的开发流程。ISO 26262 建议您使用“双向追踪软件架构设计与软件安全要求之间的联系”来验证软件架构设计。为此，您可以使用 Requirements Toolbox™ 来编写和追踪要求到模型、测试和代码。Requirements Toolbox 支持其他工具的双向跟踪，包括 Microsoft® Word®、Microsoft Excel® 和 IBM® Rational® DOORS®。此外，您可以[使用 Simulink 和 Requirements Toolbox 来创建正式而清晰的要求规范]。(https://www.mathworks.com/help/slrequirements/ug/use-requirements-table-block.html)要求的实施和验证状态在Requirements Toolbox 中进行监控和管理。要求链接可以出现在生成的代码中（图 3）。
+> 您可以通过编写功能和安全要求来启动安全相关的开发流程。ISO 26262 建议您使用“双向追踪软件架构设计与软件安全要求之间的联系”来验证软件架构设计。为此，您可以使用 Requirements Toolbox™ 来编写和追踪要求到模型、测试和代码。Requirements Toolbox 支持其他工具的双向跟踪，包括 Microsoft® Word®、Microsoft Excel® 和 IBM® Rational® DOORS®。此外，您可以[使用 Simulink 和 Requirements Toolbox 来创建正式而清晰的要求规范]。([https://www.mathworks.com/help/slrequirements/ug/use-requirements-table-block.html](https://www.mathworks.com/help/slrequirements/ug/use-requirements-table-block.html))要求的实施和验证状态在 Requirements Toolbox 中进行监控和管理。要求链接可以出现在生成的代码中（图 3）。
 
 > [](https://www.mathworks.com/company/newsletters/articles/how-to-use-simulink-for-iso-26262-projects/_jcr_content/mainParsys/image_1351358178.adapt.full.medium.jpg/1687758040972.jpg)
 > Figure 3. Requirements specification in Simulink.
@@ -176,11 +175,11 @@ IEC Certification Kit provides tool qualification support, with TÜV SÜD certif
 
 ISO 26262 states that “the implementation of the software units includes the generation of source code and the translation into object code.” To achieve this, you can use Embedded Coder® to generate C, C++, and AUTOSAR code from your Simulink and System Composer models. The code can comply with MISRA C®:2012 automatic code guidelines [5]. ISO 26262 notes that code guidelines for Model-Based Design and manual code can differ and lists MISRA® as an example.
 
-> ISO 26262 规定“软件单元的实现包括生成源代码和转换为目标代码。”为此，您可以使用嵌入式编码器 ® 从您的 Simulink 和 System Composer 模型生成 C、C++和 AUTOSAR 代码。该代码可以符合 MISRA C®：2012 自动代码指南[5]。ISO 26262 指出，基于模型的设计和手动代码的代码指南可能不同，并列出 MISRA® 作为示例。
+> ISO 26262 规定“软件单元的实现包括生成源代码和转换为目标代码。”为此，您可以使用嵌入式编码器 ® 从您的 Simulink 和 System Composer 模型生成 C、C++ 和 AUTOSAR 代码。该代码可以符合 MISRA C®：2012 自动代码指南[5]。ISO 26262 指出，基于模型的设计和手动代码的代码指南可能不同，并列出 MISRA® 作为示例。
 
 IEC Certification Kit provides tool qualification support for Embedded Coder (including ASIL A through D) for C, C++, and AUTOSAR. Its TÜV SÜD certification report states:
 
-> IEC 认证工具包为嵌入式编码器（包括 ASIL A 至 D）提供 C、C++和 AUTOSAR 的工具资格支持。其 TÜV SÜD 认证报告称：
+> IEC 认证工具包为嵌入式编码器（包括 ASIL A 至 D）提供 C、C++ 和 AUTOSAR 的工具资格支持。其 TÜV SÜD 认证报告称：
 
 _Embedded Coder fulfills the requirements of ISO 26262 regarding tool support and automation._
 
@@ -190,9 +189,9 @@ _The Embedded Coder is usually applied in one of the three following use cases:_
 
 > 嵌入式编码器通常应用于以下三种用例之一：
 
-1.  _Generating C Code for the Model Used for Production Code Generation_
-2.  _Generating C++ Code for the Model Used for Production Code Generation_
-3.  _Generating C/C++ Code and Files for AUTOSAR Application Software Components from the Model Used for Production Code Generation_
+1. _Generating C Code for the Model Used for Production Code Generation_
+2. _Generating C++ Code for the Model Used for Production Code Generation_
+3. _Generating C/C++ Code and Files for AUTOSAR Application Software Components from the Model Used for Production Code Generation_
 
 Embedded Coder provides options for optimizing code for memory and speed. In addition, you can generate processor-specific optimizations that leverage hardware accelerators such as SIMD® for ARM® and Intel®. You can verify that the optimized code matches the simulation results within prescribed tolerances, using model-to-code, processor-in-the-loop (PIL) testing as described in ISO 26262.
 
@@ -239,9 +238,9 @@ _Software unit testing can be executed in different environments, for example:_
 
 > 软件单元测试可以在不同的环境中执行，例如：
 
-_—model-in-the-loop tests;_  
-_—software-in-the-loop tests;_  
-_—processor-in-the-loop tests; and_  
+_—model-in-the-loop tests;_
+_—software-in-the-loop tests;_
+_—processor-in-the-loop tests; and_
 _—hardware-in-the-loop tests._
 
 Simulink Test automates in-the-loop testing, including SIL and PIL with Embedded Coder and HIL with Simulink Real-Time™, and provides pass/fail reports with coverage metrics from Simulink Coverage.
@@ -298,4 +297,3 @@ Published 2022
 ### View Articles for Related Capabilities
 
 ### View Articles for Related Industries
-

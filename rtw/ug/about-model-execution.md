@@ -7,7 +7,6 @@ tag:
 summary: Execute code generated from single-tasking and multitasking models for rapid-prototyping and embedded......
 > 摘要：执行从单任务和多任务模型生成的代码，用于快速原型设计和嵌入式......
 ---
-
 ## Execution of Code Generated from a Model
 
 The code generator produces algorithmic code as defined by your model. You can include external (for example, custom or legacy) code in a model by using techniques explained in [Choose an External Code Integration Workflow](https://www.mathworks.com/help/rtw/ug/choose-an-external-code-integration-approach.html).
@@ -28,25 +27,25 @@ In general, the conceptual design of the model execution driver does not change 
 
 The following concepts are useful in describing how model code executes.
 
-- **Initialization**: `` _`model`__initialize `` initializes the interface code and the model code.
+- **Initialization**: ``_`model`__initialize`` initializes the interface code and the model code.
 
-> - **初始化**：`_`model`__initialize` 初始化接口代码和模型代码。
+> - **初始化**：`_` model `__initialize` 初始化接口代码和模型代码。
 
-- **ModelOutputs**: Calls blocks in your model that have a sample hit at the current time and has them produce their output. `` _`model`__output `` can be done in major or minor time steps. In major time steps, the output is a given simulation time step. In minor time steps, the interface integrates the derivatives to update the continuous states.
+- **ModelOutputs**: Calls blocks in your model that have a sample hit at the current time and has them produce their output. ``_`model`__output`` can be done in major or minor time steps. In major time steps, the output is a given simulation time step. In minor time steps, the interface integrates the derivatives to update the continuous states.
 
-> - **模型输出**：在当前时间调用模型中具有样本命中的块，并使它们产生输出。 `` _`model`__output `` 可以在主要或次要时间步骤中完成。 在主要时间步骤中，输出是给定的仿真时间步长。 在次要时间步骤中，接口集成导数以更新连续状态。
+> - **模型输出**：在当前时间调用模型中具有样本命中的块，并使它们产生输出。 ``_`model`__output`` 可以在主要或次要时间步骤中完成。 在主要时间步骤中，输出是给定的仿真时间步长。 在次要时间步骤中，接口集成导数以更新连续状态。
 
-- **ModelUpdate**: `` _`model`__update `` calls blocks that have a sample hit at the current point in time and has them update their discrete states or similar type objects.
+- **ModelUpdate**: ``_`model`__update`` calls blocks that have a sample hit at the current point in time and has them update their discrete states or similar type objects.
 
-> `- **模型更新**：`\_`模型`\_\_update`调用在当前时间点有样本命中的块，并使它们更新其离散状态或类似类型的对象。
+> `- **模型更新**：`\_`模型`\_\_update` 调用在当前时间点有样本命中的块，并使它们更新其离散状态或类似类型的对象。
 
-- **ModelDerivatives**: Calls blocks in your model that have continuous states and has them update their derivatives. `` _`model`__derivatives `` is only called in minor time steps.
+- **ModelDerivatives**: Calls blocks in your model that have continuous states and has them update their derivatives. ``_`model`__derivatives`` is only called in minor time steps.
 
-> `模型导数：调用模型中具有连续状态的块，并使其更新其导数。`**model`**derivatives`仅在小时间步中调用。
+> `模型导数：调用模型中具有连续状态的块，并使其更新其导数。`**model `**derivatives` 仅在小时间步中调用。
 
-- **ModelTerminate**: `` _`model`__terminate `` terminates the program if it is designed to run for a finite time. It destroys the real-time model data structure, deallocates memory, and can write data to a file.
+- **ModelTerminate**: ``_`model`__terminate`` terminates the program if it is designed to run for a finite time. It destroys the real-time model data structure, deallocates memory, and can write data to a file.
 
-> - **ModelTerminate**：`model`\_\_terminate`终止程序，如果它设计为运行有限时间。它销毁实时模型数据结构，释放内存，并可以将数据写入文件。
+> - **ModelTerminate**：`model`\_\_terminate` 终止程序，如果它设计为运行有限时间。它销毁实时模型数据结构，释放内存，并可以将数据写入文件。
 
 ### Program Execution
 
@@ -85,7 +84,7 @@ In the figure above, the time between two adjacent vertical arrows is the sample
 
 If the real-time program is designed to run forever (that is, the final time is 0 or infinite so that the `while` loop never exits), then the shutdown code does not execute.
 
-> 如果实时程序设计为永久运行(即最终时间为 0 或无限，因此`while`循环永不退出)，则关机代码不会执行。
+> 如果实时程序设计为永久运行(即最终时间为 0 或无限，因此 `while` 循环永不退出)，则关机代码不会执行。
 
 For more information on how the timing engine works, see [Absolute and Elapsed Time Computation](https://www.mathworks.com/help/rtw/ug/absolute-and-elapsed-time-computation.html).
 
@@ -101,7 +100,7 @@ External mode allows communication between the Simulink® block diagram and the 
 
 [Configure Model for Debugging](https://www.mathworks.com/help/rtw/ug/instrumentation-for-debugging.html) explains how you can save system states, outputs, and time to a MAT-file at the completion of the model execution. The `LogTXY` function, which performs data logging, operates differently in single-tasking and multitasking environments.
 
-> [配置调试模型](https://www.mathworks.com/help/rtw/ug/instrumentation-for-debugging.html)解释了如何在模型执行完成后将系统状态、输出和时间保存到 MAT 文件中。用于数据记录的`LogTXY`函数在单任务和多任务环境中的操作方式不同。
+> [配置调试模型](https://www.mathworks.com/help/rtw/ug/instrumentation-for-debugging.html)解释了如何在模型执行完成后将系统状态、输出和时间保存到 MAT 文件中。用于数据记录的 `LogTXY` 函数在单任务和多任务环境中的操作方式不同。
 
 If you examine how `LogTXY` is called in the single-tasking and multitasking environments, notice that for single-tasking `LogTXY` is called after `ModelOutputs`. During this `ModelOutputs` call, blocks that have a hit at time _t_ execute, whereas in multitasking, `LogTXY` is called after `ModelOutputs(tid=0)`, which executes only the blocks that have a hit at time _t_ and that have a task identifier of 0. This results in differences in the logged values between single-tasking and multitasking logging. Specifically, consider a model with two sample times, the faster sample time having a period of 1.0 second and the slower sample time having a period of 10.0 seconds. At time t = k\*10, k=0,1,2... both the fast (`tid=0`) and slow (`tid=1`) blocks execute. When executing in multitasking mode, when `LogTXY` is called, the slow blocks execute, but the previous value is logged, whereas in single-tasking the current value is logged.
 
@@ -117,7 +116,6 @@ To summarize differences in logged data between single-tasking and multitasking,
 
 - A root outport block has a sample time that is slower than the fastest sample time
 - A block with states has a sample time that is slower than the fastest sample time
-
 - A block in an enabled subsystem where the signal driving the enable port is slower than the rate of the blocks in the enabled subsystem
 
 > 在启用的子系统中，驱动启用端口的信号比启用子系统中的块的速率慢的块。
@@ -156,11 +154,11 @@ main()
 
 The initialization phase begins first. This consists of initializing model states and setting up the execution engine. The model then executes, one step at a time. First `ModelOutputs` executes at time _t_, then the workspace I/O data is logged, and then `ModelUpdate` updates the discrete states. Next, if your model has continuous states, `ModelDerivatives` integrates the continuous states' derivatives to generate the states for time tnew=t+h, where _h_ is the step size. Time then moves forward to tnew and the process repeats.
 
-> 初始化阶段首先开始。这包括初始化模型状态并设置执行引擎。然后模型按步骤执行，首先在时间*t*上执行`ModelOutputs`，然后记录工作空间 I/O 数据，然后`ModelUpdate`更新离散状态。接下来，如果您的模型具有连续状态，则`ModelDerivatives`将连续状态的导数集成以生成时间 tnew = t + h 的状态，其中*h*是步长。然后时间前进到 tnew，并重复该过程。
+> 初始化阶段首先开始。这包括初始化模型状态并设置执行引擎。然后模型按步骤执行，首先在时间 *t* 上执行 `ModelOutputs`，然后记录工作空间 I/O 数据，然后 `ModelUpdate` 更新离散状态。接下来，如果您的模型具有连续状态，则 `ModelDerivatives` 将连续状态的导数集成以生成时间 tnew = t + h 的状态，其中 *h* 是步长。然后时间前进到 tnew，并重复该过程。
 
 During the `ModelOutputs` and `ModelUpdate` phases of model execution, only blocks that reach the current point in time execute.
 
-> 在模型执行的`ModelOutputs`和`ModelUpdate`阶段，只有到达当前时间点的块才会执行。
+> 在模型执行的 `ModelOutputs` 和 `ModelUpdate` 阶段，只有到达当前时间点的块才会执行。
 
 ### Non-Real-Time Multitasking Systems
 
@@ -201,11 +199,11 @@ Multitasking operation is more complex than single-tasking execution because the
 
 Multitasking execution assumes that task rates are multiples of the base rate. The Simulink product enforces this when you create a fixed-step multitasking model. The multitasking execution loop is very similar to that of single-tasking, except for the use of the task identifier (`tid`) argument to `ModelOutputs` and `ModelUpdate`.
 
-> 多任务执行假定任务速率是基本速率的倍数。当您创建固定步骤多任务模型时，Simulink 产品强制执行此操作。多任务执行循环与单任务执行循环非常相似，只是使用任务标识符(`tid`)参数调用`ModelOutputs`和`ModelUpdate`。
+> 多任务执行假定任务速率是基本速率的倍数。当您创建固定步骤多任务模型时，Simulink 产品强制执行此操作。多任务执行循环与单任务执行循环非常相似，只是使用任务标识符(`tid`)参数调用 `ModelOutputs` 和 `ModelUpdate`。
 
 You cannot use `tid` values from code generated by a target file and not by Simulink Coder™. Simulink Coder tracks the use of `tid` when generating code for a specific subsystem or function type. When you generate code in a target file, this argument cannot be tracked because the scope does not have subsystem or function type. Therefore, `tid` becomes an undefined variable and your target file fails to compile.
 
-> 你不能使用由目标文件生成的代码中的`tid`值，而不是由 Simulink Coder™ 生成的。 Simulink Coder 跟踪在为特定子系统或函数类型生成代码时使用`tid`的情况。 当您在目标文件中生成代码时，此参数无法跟踪，因为范围没有子系统或函数类型。 因此，`tid`变成一个未定义的变量，您的目标文件无法编译。
+> 你不能使用由目标文件生成的代码中的 `tid` 值，而不是由 Simulink Coder™ 生成的。 Simulink Coder 跟踪在为特定子系统或函数类型生成代码时使用 `tid` 的情况。 当您在目标文件中生成代码时，此参数无法跟踪，因为范围没有子系统或函数类型。 因此，`tid` 变成一个未定义的变量，您的目标文件无法编译。
 
 ### Real-Time Single-Tasking Systems
 
@@ -247,7 +245,7 @@ main()
 
 Real-time single-tasking execution is very similar to non-real-time single-tasking execution, except that instead of free-running the code, the `rt_OneStep` function is driven by a periodic timer interrupt.
 
-> 实时单任务执行与非实时单任务执行非常相似，只是**不是自由运行代码，而是由定期的定时器中断驱动`rt_OneStep`函数**。
+> 实时单任务执行与非实时单任务执行非常相似，只是**不是自由运行代码，而是由定期的定时器中断驱动 `rt_OneStep` 函数**。
 
 At the interval specified by the program's base sample rate, the interrupt service routine (ISR) preempts the background task to execute the model code. The base sample rate is the fastest in the model. If the model has continuous blocks, then the integration step size determines the base sample rate.
 
@@ -348,7 +346,7 @@ main()
 
 In this single-tasking environment, the model executes as real-time operating system tasking primitives. In this environment, create a single task (`tSingleRate`) to run the model code. This task is invoked when a clock tick occurs. The clock tick gives a `clockSem` (clock semaphore) to the model task (`tSingleRate`). The model task waits for the semaphore before executing. The clock ticks occur at the fundamental step size (base rate) for your model.
 
-> 在这种单任务环境中，模型执行作为实时操作系统任务原语。在这个环境中，创建一个单任务(`tSingleRate`)来运行模型代码。当时钟滴答发生时，就会调用这个任务。时钟滴答给模型任务(`tSingleRate`)一个`clockSem`(时钟信号量)。模型任务在执行之前等待信号量。时钟滴答以模型的基本步长(基率)发生。
+> 在这种单任务环境中，模型执行作为实时操作系统任务原语。在这个环境中，创建一个单任务(`tSingleRate`)来运行模型代码。当时钟滴答发生时，就会调用这个任务。时钟滴答给模型任务(`tSingleRate`)一个 `clockSem`(时钟信号量)。模型任务在执行之前等待信号量。时钟滴答以模型的基本步长(基率)发生。
 
 ### Multitasking Systems Using Real-Time Tasking Primitives
 
@@ -407,7 +405,7 @@ main()
 
 In this multitasking environment, the model is executed using real-time operating system tasking primitives. Such environments require several model tasks (`tBaseRate` and several `tSubRate` tasks) to run the model code. The base rate task (`tBaseRate`) has a higher priority than the subrate tasks. The subrate task for `tid=1` has a higher priority than the subrate task for `tid=2`, and so on. The base rate task is invoked when a clock tick occurs. The clock tick gives a `clockSem` to `tBaseRate`. The first thing `tBaseRate` does is give semaphores to the subtasks that have a hit at the current point in time. Because the base rate task has a higher priority, it continues to execute. Next it executes the fastest task (`tid=0`), consisting of blocks in your model that have the fastest sample time. After this execution, it resumes waiting for the clock semaphore. The clock ticks are configured to occur at the fundamental step size for your model.
 
-> 在这种多任务环境中，模型使用实时操作系统任务原语来执行。这种环境需要多个模型任务(`tBaseRate`和多个`tSubRate`任务)来运行模型代码。基本速率任务(`tBaseRate`)的优先级高于子速率任务。`tid = 1`的子速率任务的优先级高于`tid = 2`的子速率任务，依此类推。当发生时钟滴答时，会调用基本速率任务。`tBaseRate`首先会给当前时间点有命中的子任务发出信号量。由于基本速率任务的优先级更高，它会继续执行。接下来，它会执行最快的任务(`tid = 0`)，其中包含模型中具有最快采样时间的块。在此执行之后，它会恢复等待时钟信号量。为您的模型配置的时钟滴答将发生在基本步长上。
+> 在这种多任务环境中，模型使用实时操作系统任务原语来执行。这种环境需要多个模型任务(`tBaseRate` 和多个 `tSubRate` 任务)来运行模型代码。基本速率任务(`tBaseRate`)的优先级高于子速率任务。`tid = 1` 的子速率任务的优先级高于 `tid = 2` 的子速率任务，依此类推。当发生时钟滴答时，会调用基本速率任务。`tBaseRate` 首先会给当前时间点有命中的子任务发出信号量。由于基本速率任务的优先级更高，它会继续执行。接下来，它会执行最快的任务(`tid = 0`)，其中包含模型中具有最快采样时间的块。在此执行之后，它会恢复等待时钟信号量。为您的模型配置的时钟滴答将发生在基本步长上。
 
 ### Rapid Prototyping and Embedded Model Execution Differences
 
@@ -419,13 +417,13 @@ The Embedded Coder® product provides a different framework called the embedded 
 
 > 产品 Embedded Coder® 提供了一个不同的框架，称为嵌入式程序框架。嵌入式程序框架提供了一个针对您的模型优化的 API。当您使用生成的嵌入式代码样式时，您正在建模您希望在嵌入式系统中执行的代码。因此，在模型中定义的定义应该针对您的嵌入式目标。模型名称、参数和信号存储类别等项目作为嵌入式代码样式的 API 的一部分包括在内。
 
-One major difference between the rapid prototyping and embedded style of generated code is that the latter contains fewer entry-point functions. The embedded style of code can be configured to have only one function, `` _`model`__step ``.
+One major difference between the rapid prototyping and embedded style of generated code is that the latter contains fewer entry-point functions. The embedded style of code can be configured to have only one function, ``_`model`__step``.
 
 > 一个主要的区别在于快速原型和嵌入式风格的生成代码，后者包含较少的入口函数。嵌入式风格的代码可以配置为只有一个函数，"model_step"。
 
-Thus, model execution code eliminates `Loop...EndLoop` statements and groups `ModelOutputs`, `LogTXY`, and `ModelUpdate` into a single statement, `` _`model`__step ``.
+Thus, model execution code eliminates `Loop...EndLoop` statements and groups `ModelOutputs`, `LogTXY`, and `ModelUpdate` into a single statement, ``_`model`__step``.
 
-> 因此，模型执行代码消除了`Loop...EndLoop`语句，并将`ModelOutputs`，`LogTXY`和`ModelUpdate`组合成单个语句`model_step`。
+> 因此，模型执行代码消除了 `Loop...EndLoop` 语句，并将 `ModelOutputs`，`LogTXY` 和 `ModelUpdate` 组合成单个语句 `model_step`。
 
 For more information about how generated embedded code executes, see [Configure Generated C Function Interface for Model Entry-Point Functions](https://www.mathworks.com/help/rtw/ug/configure-c-code-generation-for-model-entry-point-functions.html).
 

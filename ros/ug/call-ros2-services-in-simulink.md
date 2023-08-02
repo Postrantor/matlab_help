@@ -7,12 +7,11 @@ tag: #ros
 summary: Call a service on the ROS 2 network in Simulink using the Call Service block and receive a response.
 > 在Simulink中使用Call Service块调用ROS 2网络上的服务，并接收响应。
 ---
-
-##
+## 
 
 This example shows how to call a service on the ROS 2 network in Simulink® using the [Call Service](https://ww2.mathworks.cn/help/ros/ref/callserviceros2.html) block and receive a response.
 
-> 这个例子展示了如何使用[Call Service](https://ww2.mathworks.cn/help/ros/ref/callserviceros2.html)块在 Simulink® 中调用 ROS 2 网络上的服务，并接收响应。
+> 这个例子展示了如何使用 [Call Service](https://ww2.mathworks.cn/help/ros/ref/callserviceros2.html) 块在 Simulink® 中调用 ROS 2 网络上的服务，并接收响应。
 
 ### Set Up ROS 2 Network and Service Server
 
@@ -24,7 +23,7 @@ node_1 = ros2node(exampleHelperCreateRandomNodeName);
 
 Create a service that adds two integers using the exiisting service type `example_interfaces/AddTwoInts`. Specify the callback function to be `exampleHelperROS2SumCallback` which performs the addition of numbers in the `a` and `b` fields of the service request message.
 
-> 创建一个使用现有服务类型`example_interfaces/AddTwoInts`来添加两个整数的服务。指定回调函数为`exampleHelperROS2SumCallback`，该函数执行服务请求消息中`a`和`b`字段的加法运算。
+> 创建一个使用现有服务类型 `example_interfaces/AddTwoInts` 来添加两个整数的服务。指定回调函数为 `exampleHelperROS2SumCallback`，该函数执行服务请求消息中 `a` 和 `b` 字段的加法运算。
 
 ```matlab
 sumserver = ros2svcserver(node_1,"/sum","example_interfaces/AddTwoInts",@exampleHelperROS2SumCallback);
@@ -37,7 +36,7 @@ sumserver = ros2svcserver(node_1,"/sum","example_interfaces/AddTwoInts",@example
 
 Open the Simulink model with the [Call Service](https://ww2.mathworks.cn/help/ros/ref/callserviceros2.html) block. Use the [Blank Message](https://ww2.mathworks.cn/help/ros/ref/blankmessageros2.html) block to output a request message with the `example_interfaces/AddTwoIntsRequest` message type. Populate the bus with two values to sum together. You can ignore warnings about converting data types.
 
-> 打开带有[调用服务]块的 Simulink 模型。使用[空消息]块输出一个使用`example_interfaces/AddTwoIntsRequest`消息类型的请求消息。用两个值填充总线以进行求和。您可以忽略有关转换数据类型的警告。
+> 打开带有[调用服务]块的 Simulink 模型。使用[空消息]块输出一个使用 `example_interfaces/AddTwoIntsRequest` 消息类型的请求消息。用两个值填充总线以进行求和。您可以忽略有关转换数据类型的警告。
 
 ![](https://ww2.mathworks.cn/help/examples/ros/win64/CallROS2ServiceInSimulinkExample_01.png)
 
@@ -47,15 +46,15 @@ open_system("AddTwoIntsROS2ServiceExampleModel.slx")
 
 Run the model. The service call should return `-2` from the **Resp** output port, as part of the `sum` field in the response message. An error code of `0` indicates that the service call was successful.
 
-> 运行模型。服务调用应该从**Resp**输出端口返回`-2`，作为响应消息中的`sum`字段的一部分。错误代码`0`表示服务调用成功。
+> 运行模型。服务调用应该从 **Resp** 输出端口返回 `-2`，作为响应消息中的 `sum` 字段的一部分。错误代码 `0` 表示服务调用成功。
 
 ```matlab
 sim("AddTwoIntsROS2ServiceExampleModel.slx");
 ```
 
-##
+## 
 
-###
+### 
 
 Call a service in a ROS 2 network.
 

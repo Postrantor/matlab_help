@@ -343,7 +343,8 @@ creal_T rotate_complex(double theta)
 
 全部折叠
 
-### `function` — MATLAB 函数名称  
+### `function` — MATLAB 函数名称
+
 字符向量
 
 声明为外部函数的 MATLAB 函数的名称。
@@ -354,26 +355,23 @@ creal_T rotate_complex(double theta)
 
 ## 限制
 
-*   外部函数调用有一些开销可能会影响性能。在外部函数调用中传递的输入数据必须提供给 MATLAB，它需要制作数据副本。如果该函数具有任何输出数据，这些数据必须传输回 MEX 函数环境，它也需要副本。
-    
-*   代码生成器不支持使用 `coder.extrinsic` 来调用位于私有文件夹中的函数。
-    
-*   代码生成器不支持使用 `coder.extrinsic` 来调用局部函数。
-    
+* 外部函数调用有一些开销可能会影响性能。在外部函数调用中传递的输入数据必须提供给 MATLAB，它需要制作数据副本。如果该函数具有任何输出数据，这些数据必须传输回 MEX 函数环境，它也需要副本。
+* 代码生成器不支持使用 `coder.extrinsic` 来调用位于私有文件夹中的函数。
+* 代码生成器不支持使用 `coder.extrinsic` 来调用局部函数。
 
 ## 提示
 
-*   代码生成器自动将许多常见的 MATLAB 可视化函数（例如 `plot`、`disp` 和 `figure`）视为外部函数。您不必使用 `coder.extrinsic` 将它们显式声明为外部函数。
-    
-*   使用 `coder.screener` 函数可以检测哪些函数必须声明为外部函数。此函数运行代码生成就绪工具，它会筛查 MATLAB 代码中是否存在代码生成不支持的功能和函数。
-    
+* 代码生成器自动将许多常见的 MATLAB 可视化函数（例如 `plot`、`disp` 和 `figure`）视为外部函数。您不必使用 `coder.extrinsic` 将它们显式声明为外部函数。
+* 使用 `coder.screener` 函数可以检测哪些函数必须声明为外部函数。此函数运行代码生成就绪工具，它会筛查 MATLAB 代码中是否存在代码生成不支持的功能和函数。
 
 ## 扩展功能
 
-### C/C++ 代码生成  
+### C/C++ 代码生成
+
 使用 MATLAB® Coder™ 生成 C 代码和 C++ 代码。
 
-### GPU 代码生成  
+### GPU 代码生成
+
 使用 GPU Coder™ 为 NVIDIA® GPU 生成 CUDA® 代码。
 
 您曾对此示例进行过修改。是否要打开带有您的编辑的示例？
@@ -392,7 +390,7 @@ Unrated
 
 5 stars
 
- Unrated  1 star  2 stars  3 stars  4 stars  5 stars
+Unrated  1 star  2 stars  3 stars  4 stars  5 stars
 
 您点击的链接对应于以下 MATLAB 命令：
 

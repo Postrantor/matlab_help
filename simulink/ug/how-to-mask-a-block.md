@@ -15,14 +15,12 @@ summary: 创建和自定义模块封装。
 
 ### 步骤 1：打开封装编辑器
 
-1.  打开您要在其中封装模块的模型。例如，打开 `[subsystem_example](matlab:open_system([matlabroot '/examples/subsystem_reference/main/subsystem_example']))`。
-    
-    此模型包含一个 Subsystem 模块，该模块为直线方程建模：`y = mx + b`。
-    
-2.  选择 Subsystem 模块，在**子系统**选项卡上，在**封装**组中，点击**创建掩膜**。
-    
-    ![](https://ww2.mathworks.cn/help/simulink/ug/maskexeditora3cc21232fd49ce251350a84fee9f6ad_zh_CN.png)
-    
+1. 打开您要在其中封装模块的模型。例如，打开 `[subsystem_example](matlab:open_system([matlabroot '/examples/subsystem_reference/main/subsystem_example']))`。
+
+   此模型包含一个 Subsystem 模块，该模块为直线方程建模：`y = mx + b`。
+2. 选择 Subsystem 模块，在**子系统**选项卡上，在**封装**组中，点击**创建掩膜**。
+
+   ![](https://ww2.mathworks.cn/help/simulink/ug/maskexeditora3cc21232fd49ce251350a84fee9f6ad_zh_CN.png)
 
 ### 步骤 2：定义封装
 
@@ -36,18 +34,13 @@ summary: 创建和自定义模块封装。
 
 向模块封装添加**编辑**框。
 
-1.  在左窗格的**参数**下，点击**编辑**两次以向**对话框**窗格中添加两个新行。
-    
-2.  在**提示**列中，为两个**编辑**参数键入 `Slope` 和 `Intercept`。您在**提示**列中输入的值将出现在封装对话框中。同样，在**名称**列中键入 `m` 和 `b`。您在**名称**列中输入的值是封装参数名称。封装参数名称必须是有效的 MATLAB® 名称。
-    
-3.  在右窗格的**属性编辑器**下，为**属性**、**对话框**和**布局**部分中的字段提供输入值。
-    
-4.  点击**应用**。
-    
-    ![](https://ww2.mathworks.cn/help/simulink/ug/maskexeditor9778ae7fb1274b08ff4f7f3982ff4178_zh_CN.png)
-    
-5.  要预览封装对话框而不退出封装编辑器，请点击**预览**。
-    
+1. 在左窗格的**参数**下，点击**编辑**两次以向**对话框**窗格中添加两个新行。
+2. 在**提示**列中，为两个**编辑**参数键入 `Slope` 和 `Intercept`。您在**提示**列中输入的值将出现在封装对话框中。同样，在**名称**列中键入 `m` 和 `b`。您在**名称**列中输入的值是封装参数名称。封装参数名称必须是有效的 MATLAB® 名称。
+3. 在右窗格的**属性编辑器**下，为**属性**、**对话框**和**布局**部分中的字段提供输入值。
+4. 点击**应用**。
+
+   ![](https://ww2.mathworks.cn/help/simulink/ug/maskexeditor9778ae7fb1274b08ff4f7f3982ff4178_zh_CN.png)
+5. 要预览封装对话框而不退出封装编辑器，请点击**预览**。
 
 有关详细信息，请参阅 [“参数和对话框” 窗格](https://ww2.mathworks.cn/help/simulink/gui/mask-editor-overview.html#bu085yl)。
 
@@ -89,36 +82,27 @@ Simulink® 封装参数无法引用同一封装上的另一个参数。
 
 ### 步骤 3：对封装进行操作
 
-1.  您可以预览封装，还可以选择取消模块封装或编辑模块封装。
-    
-2.  双击封装模块。
-    
-    ![](https://ww2.mathworks.cn/help/simulink/ug/maskexdialogbox_zh_CN.png)
-    
-    随即显示封装对话框。
-    
-3.  在封装对话框的 `Slope` 和 `Intercept` 框中键入值。要查看输出，请对模型进行仿真。
-    
-4.  点击**确定**。
-    
-5.  要编辑封装定义，请选择子系统模块，然后从工具条中的 “子系统” 选项卡中点击**编辑封装**。有关详细信息，请参阅 [Manage Existing Masks](https://ww2.mathworks.cn/help/simulink/ug/operate-on-existing-masks.html)。
-    
-6.  选择封装模块，并在 **Subsystem 模块**选项卡上的**封装**组中，点击**查看封装内部**以查看：
-    
-    *   封装子系统内的模块
-        
-    *   封装模块的内置模块对话框
-        
-    *   链接的封装模块的基础封装对话框
-        
-    
+1. 您可以预览封装，还可以选择取消模块封装或编辑模块封装。
+2. 双击封装模块。
+
+   ![](https://ww2.mathworks.cn/help/simulink/ug/maskexdialogbox_zh_CN.png)
+
+   随即显示封装对话框。
+3. 在封装对话框的 `Slope` 和 `Intercept` 框中键入值。要查看输出，请对模型进行仿真。
+4. 点击**确定**。
+5. 要编辑封装定义，请选择子系统模块，然后从工具条中的 “子系统” 选项卡中点击**编辑封装**。有关详细信息，请参阅 [Manage Existing Masks](https://ww2.mathworks.cn/help/simulink/ug/operate-on-existing-masks.html)。
+6. 选择封装模块，并在 **Subsystem 模块**选项卡上的**封装**组中，点击**查看封装内部**以查看：
+
+   * 封装子系统内的模块
+   * 封装模块的内置模块对话框
+   * 链接的封装模块的基础封装对话框
 
 ## 相关主题
 
-*   [创建模块封装](https://ww2.mathworks.cn/help/simulink/block-masks.html)
-*   [创建封装：封装基础知识（3 分 46 秒）](https://www.mathworks.com/videos/creating-a-mask--masking-fundamentals-1480968643715.html)
-*   [封装编辑器概述](https://ww2.mathworks.cn/help/simulink/gui/mask-editor-overview.html)
-*   [封装基础知识](https://ww2.mathworks.cn/help/simulink/ug/block-masks.html)
+* [创建模块封装](https://ww2.mathworks.cn/help/simulink/block-masks.html)
+* [创建封装：封装基础知识（3 分 46 秒）](https://www.mathworks.com/videos/creating-a-mask--masking-fundamentals-1480968643715.html)
+* [封装编辑器概述](https://ww2.mathworks.cn/help/simulink/gui/mask-editor-overview.html)
+* [封装基础知识](https://ww2.mathworks.cn/help/simulink/ug/block-masks.html)
 
 本页内容对您有帮助吗？
 
@@ -134,7 +118,7 @@ Unrated
 
 5 stars
 
- Unrated  1 star  2 stars  3 stars  4 stars  5 stars
+Unrated  1 star  2 stars  3 stars  4 stars  5 stars
 
 您点击的链接对应于以下 MATLAB 命令：
 

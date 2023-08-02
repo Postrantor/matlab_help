@@ -9,12 +9,9 @@ summary: Maintain absolute and elapsed timing data for blocks that execute in th
 
 An ISR can set a source for absolute time. This is done with the function `ssSetTimeSource`. The function `ssSetTimeSource` cannot be called before `ssSetOutputPortWidth` is called. If this occurs, the program will come to a halt and generate an error message. `ssSetTimeSource` has the following three options:
 
-*   `SS_TIMESOURCE_SELF`: Each generated ISR maintains its own absolute time counter, which is distinct from a periodic base rate or subrate counters in the system. The counter value and the timer resolution value (specified with the block parameter **Timer resolution (seconds)** of the Async Interrupt block) are used by downstream blocks to determine absolute time values required by block computations.
-    
-*   `SS_TIMESOURCE_CALLER`: The ISR reads time from a counter maintained by its caller. Time resolution is thus the same as its caller's resolution.
-    
-*   `SS_TIMESOURCE_BASERATE`: The ISR can read absolute time from the model's periodic base rate. Time resolution is thus the same as its base rate resolution.
-    
+* `SS_TIMESOURCE_SELF`: Each generated ISR maintains its own absolute time counter, which is distinct from a periodic base rate or subrate counters in the system. The counter value and the timer resolution value (specified with the block parameter **Timer resolution (seconds)** of the Async Interrupt block) are used by downstream blocks to determine absolute time values required by block computations.
+* `SS_TIMESOURCE_CALLER`: The ISR reads time from a counter maintained by its caller. Time resolution is thus the same as its caller's resolution.
+* `SS_TIMESOURCE_BASERATE`: The ISR can read absolute time from the model's periodic base rate. Time resolution is thus the same as its base rate resolution.
 
 **Note**
 
@@ -66,17 +63,17 @@ For an example of timer code generation, see [Async Interrupt Block Implementati
 
 ## Related Examples
 
-*   [Generate Interrupt Service Routines](https://www.mathworks.com/help/rtw/ug/generate-interrupt-service-routines.html)
-*   [Spawn and Synchronize Execution of RTOS Task](https://www.mathworks.com/help/rtw/ug/spawn-a-wind-river-vxworks-task.html)
-*   [Create a Customized Asynchronous Library](https://www.mathworks.com/help/rtw/ug/create-a-customized-asynchronous-library.html)
-*   [Import Asynchronous Event Data for Simulation](https://www.mathworks.com/help/rtw/ug/import-asynchronous-event-data-for-simulation.html)
+* [Generate Interrupt Service Routines](https://www.mathworks.com/help/rtw/ug/generate-interrupt-service-routines.html)
+* [Spawn and Synchronize Execution of RTOS Task](https://www.mathworks.com/help/rtw/ug/spawn-a-wind-river-vxworks-task.html)
+* [Create a Customized Asynchronous Library](https://www.mathworks.com/help/rtw/ug/create-a-customized-asynchronous-library.html)
+* [Import Asynchronous Event Data for Simulation](https://www.mathworks.com/help/rtw/ug/import-asynchronous-event-data-for-simulation.html)
 
 ## More About
 
-*   [Absolute and Elapsed Time Computation](https://www.mathworks.com/help/rtw/ug/absolute-and-elapsed-time-computation.html)
-*   [Time-Based Scheduling and Code Generation](https://www.mathworks.com/help/rtw/ug/time-based-scheduling-and-code-generation.html)
-*   [Asynchronous Events](https://www.mathworks.com/help/rtw/ug/asynchronous-events.html)
-*   [Asynchronous Support Limitations](https://www.mathworks.com/help/rtw/ug/asynchronous-support-limitations.html)
+* [Absolute and Elapsed Time Computation](https://www.mathworks.com/help/rtw/ug/absolute-and-elapsed-time-computation.html)
+* [Time-Based Scheduling and Code Generation](https://www.mathworks.com/help/rtw/ug/time-based-scheduling-and-code-generation.html)
+* [Asynchronous Events](https://www.mathworks.com/help/rtw/ug/asynchronous-events.html)
+* [Asynchronous Support Limitations](https://www.mathworks.com/help/rtw/ug/asynchronous-support-limitations.html)
 
 How useful was this information?
 
@@ -92,7 +89,7 @@ Unrated
 
 5 stars
 
- Unrated  1 star  2 stars  3 stars  4 stars  5 stars
+Unrated  1 star  2 stars  3 stars  4 stars  5 stars
 
 You clicked a link that corresponds to this MATLAB command:
 

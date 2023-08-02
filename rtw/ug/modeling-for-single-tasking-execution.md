@@ -23,10 +23,8 @@ Single-tasking system execution requires a base sample rate that is long enough 
 
 To use single-tasking execution, clear model configuration parameter **Treat each discrete rate as a separate task**. If you select the parameter, single-tasking mode is used in the following cases:
 
-*   If your model contains one sample time
-    
-*   If your model contains a continuous and a discrete sample time and the fixed step size is equal to the discrete sample time
-    
+* If your model contains one sample time
+* If your model contains a continuous and a discrete sample time and the fixed step size is equal to the discrete sample time
 
 ### Single-Tasking Execution
 
@@ -76,6 +74,6 @@ Because time is simulated, the placement of ticks represents the iterations of t
 
 ## Related Topics
 
-*   [Time-Based Scheduling and Code Generation](https://www.mathworks.com/help/rtw/ug/time-based-scheduling-and-code-generation.html)
-*   [Configure Time-Based Scheduling](https://www.mathworks.com/help/rtw/ug/configure-time-based-scheduling.html)
-*   [Time-Based Scheduling Example Models](https://www.mathworks.com/help/rtw/ug/time-based-scheduling-example-models-1.html)
+* [Time-Based Scheduling and Code Generation](https://www.mathworks.com/help/rtw/ug/time-based-scheduling-and-code-generation.html)
+* [Configure Time-Based Scheduling](https://www.mathworks.com/help/rtw/ug/configure-time-based-scheduling.html)
+* [Time-Based Scheduling Example Models](https://www.mathworks.com/help/rtw/ug/time-based-scheduling-example-models-1.html)

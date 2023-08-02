@@ -9,7 +9,6 @@ summary: The need to bring innovative, high quality products to market faster is
 > 更快地将创新、高质量的产品推向市场的需求正在推动越来越多地使用......
 author: By Sameer M. Prabhu, MathWorks and Pieter J. Mosterman, MathWorks
 ---
-
 The need to bring innovative, high quality products to market faster is driving the increased use of models during the design and realization process in industry. Model-based design facilitates an advanced approach to product development, which aids in delivering products on time and within budget while meeting initial requirements. In addition, advances in model-based design tools, which allow automatic generation of prototype and production code from a model, significantly shorten the development path. This paper applies the model-based design process to the design of a power window control system that is typically found in modern automobiles and considers various aspects of the validation process via testing, both during simulation and physical realization.
 
 > 需要更快地将创新的高质量产品投放市场，正在推动工业在设计和实现过程中越来越多地使用模型。**基于模型的设计提供了一种先进的产品开发方法，有助于按时、按预算完成初始要求**。此外，基于模型的设计工具的进步，**可以从模型自动生成原型和生产代码**，大大缩短了开发路径。本文将基于模型的设计过程应用于通常可以在现代汽车中找到的电动窗控制系统的设计，并通过模拟和物理实现的测试考虑验证过程的各个方面。
@@ -37,10 +36,11 @@ In the traditional approach, strict boundaries between design activities are enf
 - The separation between different design stages requires coding to be a separate and manual activity.
 
   > 分离不同设计阶段需要将编码作为一项独立的手动活动。
-
+  >
 - Using documents as deliverables leads to a duplication of effort when information is needed in an electronic format. It is difficult to trace the source of errors along a paper trail.
 
   > 使用文件作为交付物会在需要电子格式的信息时导致重复努力。沿着纸质路径很难追踪错误的来源。
+  >
 
 The need to address the shortcomings listed above and to address the continuing increase in product complexity, performance requirements, and reduced product development times has driven the increased use of models as part of the design and realization process. The use of models in the early design stages allows ‘ executable specifications’, i.e., the specifications can be validated and verified against the requirements immediately. Validation focuses on ensuring that the requirements are correct and that they represent the intended behavior. Verification focuses on ensuring that the outputs of each step satisfy the step’s inputs, i.e., it ensures that the system satisfies its requirements. Less formally, verification checks whether the model is built correctly and validation whether the correct model is built. By introducing the verification and validation activities in the early design stages, model-based design allows errors to be detected earlier when the cost to fix them is less.
 
