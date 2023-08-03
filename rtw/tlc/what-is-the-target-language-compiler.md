@@ -68,11 +68,11 @@ To create a target-specific application, the code generator requires a template 
 
 The Target Language Compiler has similarities with HTML, Perl, and MATLAB®. It has markup syntax similar to HTML, the power and flexibility of Perl and other scripting languages, and the data handling power of MATLAB (TLC can invoke MATLAB functions). The code that TLC generated is highly optimized and fully commented. With TLC, you can generate code from linear, nonlinear, continuous, discrete, or hybrid Simulink models. The models can include Simulink blocks that are automatically converted to code. Exceptions are MATLAB function blocks and S-function blocks that invoke MATLAB files. The Target Language Compiler uses _block target files_ to transform each block in the `` _`model`_.rtw `` file and a _model-wide target file_ for global customization of the code.
 
-> 目标语言编译器与 HTML、Perl 和 MATLAB® 有相似之处。它具有类似 HTML 的标记语法、Perl 及其他脚本语言的功能和灵活性以及 MATLAB 的数据处理能力（TLC 可以调用 MATLAB 函数）。TLC 生成的代码高度优化且完全注释。使用 TLC，您可以从线性、非线性、连续、离散或混合 Simulink 模型生成代码。模型可以包括自动转换为代码的 Simulink 块，例外情况是调用 MATLAB 文件的 MATLAB 函数块和 S 函数块。目标语言编译器使用*块目标文件*来转换`` _`model`_.rtw ``文件中的每个块，以及*模型范围的目标文件*来全局自定义代码。
+> 目标语言编译器与 HTML、Perl 和 MATLAB® 有相似之处。它具有类似 HTML 的标记语法、Perl 及其他脚本语言的功能和灵活性以及 MATLAB 的数据处理能力（TLC 可以调用 MATLAB 函数）。TLC 生成的代码高度优化且完全注释。使用 TLC，您可以从线性、非线性、连续、离散或混合 Simulink 模型生成代码。模型可以包括自动转换为代码的 Simulink 块，例外情况是调用 MATLAB 文件的 MATLAB 函数块和 S 函数块。目标语言编译器使用 _块目标文件_ 来转换`` _`model`_.rtw ``文件中的每个块，以及 _模型范围的目标文件_ 来全局自定义代码。
 
 You can incorporate C MEX S-functions, with the generated code into the program executable. You can write a target file for your C MEX S-function to _inline_ the S-function (see [Inline C MEX S-Functions](https://www.mathworks.com/help/rtw/tlc/inlining-c-mex-s-functions.html)), to improve performance by eliminating function calls to the S-function itself and the memory overhead of the `SimStruct` of the S-function. Inlining an S-function incorporates the S-function block code into the generated code for the model. When a TLC target file is not present for the S-function, its C or C++ code file is invoked through a function call. See [Inline S-Functions](https://www.mathworks.com/help/rtw/tlc/introduction-inline-s-functions.html). You can also write target files for MATLAB language files or Fortran S-functions.
 
-> 您可以将生成的代码与 C MEX S 函数相结合，将其纳入程序可执行文件中。您可以为 C MEX S 函数编写目标文件以*inline*该 S 函数（参见[Inline C MEX S 函数](https://www.mathworks.com/help/rtw/tlc/inlining-c-mex-s-functions.html)），以通过消除对 S 函数本身以及 S 函数的`SimStruct`的内存开销的函数调用来提高性能。将 S 函数块代码内联到模型的生成代码中。当 S 函数没有 TLC 目标文件时，其 C 或 C++代码文件将通过函数调用调用。参见[内联 S 函数](https://www.mathworks.com/help/rtw/tlc/introduction-inline-s-functions.html)。您还可以为 MATLAB 语言文件或 Fortran S 函数编写目标文件。
+> 您可以将生成的代码与 C MEX S 函数相结合，将其纳入程序可执行文件中。您可以为 C MEX S 函数编写目标文件以 _inline_ 该 S 函数（参见[Inline C MEX S 函数](https://www.mathworks.com/help/rtw/tlc/inlining-c-mex-s-functions.html)），以通过消除对 S 函数本身以及 S 函数的`SimStruct`的内存开销的函数调用来提高性能。将 S 函数块代码内联到模型的生成代码中。当 S 函数没有 TLC 目标文件时，其 C 或 C++代码文件将通过函数调用调用。参见[内联 S 函数](https://www.mathworks.com/help/rtw/tlc/introduction-inline-s-functions.html)。您还可以为 MATLAB 语言文件或 Fortran S 函数编写目标文件。
 
 ### Overview of the Code Generation Process
 
@@ -111,15 +111,6 @@ Files placed in the build folder include:
 ## Related Topics
 
 - [Why Use the Target Language Compiler?](https://www.mathworks.com/help/rtw/tlc/target-language-compiler-capabilities.html)
-
-> - 为什么使用目标语言编译器？（https://www.mathworks.com/help/rtw/tlc/target-language-compiler-capabilities.html）
-
 - [Advice About TLC Tutorials](https://www.mathworks.com/help/rtw/tlc/introduction-tlc-tutorials.html)
-
-> \*[关于 TLC 教程的建议](https://www.mathworks.com/help/rtw/tlc/introduction-tlc-tutorials.html)
-
 - [TLC Files](https://www.mathworks.com/help/rtw/tlc/tlc-files.html)
-
 - [Inline S-Functions with TLC](https://www.mathworks.com/help/rtw/tlc/inlining-s-functions-with-tlc.html)
-
-> - [TLC 中的内联 S 函数](https://www.mathworks.com/help/rtw/tlc/inlining-s-functions-with-tlc.html)
