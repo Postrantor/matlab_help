@@ -1,0 +1,366 @@
+---
+url: https://ww2.mathworks.cn/help/ecoder/ug/replace-external-code-with-generated-code.html
+title: Integrate External Application Code with Code Generated from PID Controller
+- MATLAB & Simulink
+- MathWorks 中国
+date: 2023-08-18 21:00:26
+tag: 
+summary: Generate code that matches the data interfaces, appearance, and organization of external code.
+---
+This example shows how to generate C code from a control algorithm model and integrate that code with existing, external application code. In the complete application, which consists of three modules, the algorithm module must exchange data with other modules through global variables. In the example, you configure the generated code to interact with existing external variables, resemble the external code in appearance and organization, and conform to specific coding requirements.
+
+### Inspect External Code
+
+Run the script `prepare_ext_code`. The script copies external code files into several folders.
+
+```
+exampleFolder = pwd;
+run('prepare_ext_code.m');
+
+
+```
+
+Open `ext_code_main.c`. This application code represents an embedded system with a trivial scheduling algorithm (a `while` loop) and three modules that include algorithms that run in every execution cycle: `ex_ext_inputs_proc`, `ex_ext_ctrl_alg`, and `ex_ext_outputs_proc`.
+
+In the `shared` folder, inspect `ex_ext_projTypes.h`. The file defines two custom data types (`typedef`) that the data in the modules use.
+
+```
+type(fullfile('shared','ex_ext_projTypes.h'))
+
+
+```
+
+In the `io_drivers` folder, inspect `ex_sensor_accessors.c`. This file defines functions `get_fromSensor_flow` and `get_fromSensor_temp`, which return raw data recorded by a flow sensor and a temperature sensor. For this example, the functions return trivial sinusoidal stimuli for the control algorithm.
+
+```
+type(fullfile('io_drivers','ex_sensor_accessors.c'))
+
+
+```
+
+In the `ex_ext_inputs_proc` folder, inspect `ex_ext_inputs_proc.c`. The `ex_ext_inputs_proc` module reads the sensor data (by calling the accessor functions), filters the data, and stores it in two global variables, `PROC_INPUT_FLOW` and `PROC_INPUT_TEMP`. These global variables are defined in the file `ex_ext_proc_inputs.c` and declared in `ex_ext_proc_inputs.h`.
+
+```
+type(fullfile('ex_ext_inputs_proc','ex_ext_inputs_proc.c'))
+
+
+```
+
+The filter algorithm in this module and the algorithms in the other two modules require state data, which must persist between execution cycles of the application. Each module stores relevant state data as global variables. For example, in the `ex_ext_inputs_proc` module, `ex_ext_inputs_proc.c` defines these variables:
+
+*   `flowFilterIn_state_data`
+    
+*   `tempFilterIn_state_data`
+    
+*   `flowFilterIn_tmp_data`
+    
+*   `tempFilterIn_tmp_data`
+    
+
+The empty `ex_ext_ctrl_alg` folder is a placeholder for the generated code. The `ex_ext_ctrl_alg` module must perform PID control on the filtered flow and temperature measurements. Later, you examine the requirements for this code, which are based on the code in the other modules.
+
+In the `ex_ext_outputs_proc` folder, inspect `ex_ext_outputs_proc.c`. This module reads the PID output signals from global variables named `CONTR_SIG_FLOW` and `CONTR_SIG_TEMP`. The `ex_ext_ctrl_alg` module (the generated code) must define these variables. The `ex_ext_outputs_proc` module filters these signals and passes the filtered values to functions that represent device drivers for actuators (for example, a valve and a heater filament).
+
+```
+type(fullfile('ex_ext_outputs_proc','ex_ext_outputs_proc.c'))
+
+
+```
+
+The actuator functions are defined in the `io_drivers` folder in the file `ex_actuator_accessors.c`.
+
+The figure shows the intended flow of data through the system. The figure also shows the code files that define and declare the data (global variables) that cross the module boundaries.
+
+![](https://ww2.mathworks.cn/help/examples/ecoder/win64/xxex_ext_data_flow_diag_save.png)
+
+### Inspect Simulink Model and Determine Requirements for Generated Code
+
+Open the example model `ex_ext_ctrl_alg`.
+
+The blocks in the model implement the required PID controller algorithm. The model uses default code generation settings for an ERT-based system target file (`ert.tlc`).
+
+To complete the application, you must generate code that performs the function of the `ex_ext_ctrl_alg` module. The code generated from the model must:
+
+*   Use the custom data types `dataPath_flow_T` and `dataPath_temp_T` declared in the external file `ex_ext_projTypes.h`.
+    
+*   Read filtered sensor data from global variables `PROC_INPUT_FLOW` and `PROC_INPUT_TEMP`. The generated code must not define these variables because the module `ex_ext_inputs_proc` defines them, declaring them in `ex_ext_proc_inputs.h`.
+    
+*   Write PID control signals to global variables named `CONTR_SIG_FLOW` and `CONTR_SIG_TEMP`. The generated code must define these variables and declare them in file `ex_ext_ctrl_sigs.h`. Then, the `ex_ext_outputs_proc` module can read the raw control signals from them.
+    
+*   Conform to variable naming standards that govern the external application. For example, the generated code must store state data in global variables with names that end in `_data`. In addition, for this example, the names of local function variables must end in `_local`.
+    
+*   Conform to standards that govern the organization of the code in each of the external files. For example, each file contains sections, delimited by comments, which aggregate similar code constructs such as type definitions, variable declarations, and function definitions.
+    
+
+So that you and others can interact with the control algorithm during execution, you configure the generated code to define and declare `const` global variables named `PARAM_setpoint_flow` and `PARAM_setpoint_temp`, which represent the PID controller setpoints. The definitions must be in a file named `ex_ext_ctrl_params.c` and the declarations must be in a file named `ex_ext_ctrl_params.h`.
+
+### Configure Model to Use Custom Data Types
+
+Set your current folder to the `shared` folder.
+
+Use the function `Simulink.importExternalCTypes` to generate `Simulink.AliasType` objects that represent the custom data types `dataPath_flow_T` and `dataPath_temp_T`.
+
+```
+cd('shared');
+Simulink.importExternalCTypes('ex_ext_projTypes.h');
+
+
+```
+
+The objects appear in the base workspace.
+
+1. Open the model `ex_ext_ctrl_alg` model.
+
+2. Open the Embedded Coder app.
+
+3. Open the Model Data Editor by using the tab near the bottom the app window.
+
+4. In the Model Data Editor, for the Inport block that represents `PROC_INPUT_FLOW`, set **Data Type** to `dataPath_flow_T`. To add the custom data types to the **Data Type** list, click `Refresh data types`.
+
+5. For the Inport block that represents `PROC_INPUT_TEMP`, set **Data Type** to `dataPath_temp_T`.
+
+6. Select the **Signals** tab.
+
+7. Configure the data type for the Constant blocks. For each Constant block, in the model, select the block output signal. Then, in the Model Data Editor, set **Data Type** to `Inherit: Inherit via back propagation`. With this setting, the Constant blocks inherit the output data type of the block immediately downstream. In this case, the downstream block is a Sum block.
+
+Alternatively, to configure the data types programmatically or at the command prompt, use these commands.
+
+```
+set_param('ex_ext_ctrl_alg/In1','OutDataTypeStr','dataPath_flow_T')
+set_param('ex_ext_ctrl_alg/In2','OutDataTypeStr','dataPath_temp_T')
+set_param('ex_ext_ctrl_alg/Flow Setpt','OutDataTypeStr',...
+    'Inherit: Inherit via back propagation')
+set_param('ex_ext_ctrl_alg/Temp Setpt','OutDataTypeStr',...
+    'Inherit: Inherit via back propagation')
+
+
+```
+
+Update the block diagram. The diagram shows that, due to data type inheritance and propagation, signals in the model use a custom data type.
+
+### Configure Code Interface for Inports and Outports
+
+Configure the model to generate code that accesses and defines global variables for model inports and outports.
+
+1. In the Embedded Coder app, on the **C Code** tab, select **Code Interface** > **Individual Element Code Mappings**.
+
+2. In the Code Mappings editor, click the **Data Defaults** tab.
+
+3. Expand **Inports and Outports**.
+
+4. For **Inports**, set **Storage Class** to `ImportFromFile`. Click the pencil icon and set the **HeaderFile** property to `ex_ext_proc_inputs.h`. With the storage class `ImportFromFile`, each inport appears in the generated code as a global variable. Instead of defining the variable, the generated code includes (`#include`) the variable declaration from header file `ex_ext_proc_inputs.h`.
+
+6. For **Outports**, set **Storage Class** to `ExportToFile`. Click the pencil icon and set the **HeaderFile** property to `ex_ext_ctrl_sigs.h` and the **DefinitionFile** property to `ex_ext_ctrl_sigs.c`. With the storage class `ExportToFile`, the generated code defines the global variable.
+
+7. On the **Inports** tab, for each inport, set **Storage Class** to `Model default: ImportFromfile`.
+
+8. On the **Outports** tab, for each outport, set **Storage Class** to `Model default: ExportToFile`.
+
+9. Save the model. Alternatively, to configure interfaces for the inports and outports programmatically or at the command prompt, use these commands.
+
+```
+cm = coder.mapping.api.get('ex_ext_ctrl_alg');
+setDataDefault(cm,'Inports','StorageClass','ImportFromFile','HeaderFile', ...
+    'ex_ext_proc_inputs.h');
+setInport(cm,'In1','StorageClass','Model default');
+setInport(cm,'In2','StorageClass','Model default');
+setDataDefault(cm,'Outports','StorageClass','ExportToFile','HeaderFile', ...
+    'ex_ext_ctrl_sigs.h','DefinitionFile','ex_ext_ctrl_sigs.c');
+setOutport(cm,'Out1','StorageClass','Model default');
+setOutport(cm,'Out2','StorageClass','Model default');
+
+
+```
+
+### Configure Code Interface for Constant Parameters
+
+To apply a storage class to the parameters represented by Constant blocks `Flow Setpt` and `Temp Setpt`, use the Model Explorer to create `Simulink.Parameter` objects to represent the data. Create two model workspace parameters.
+
+1. Open the Model Explorer.
+
+2. In the **Model Hierarchy** pane, select **Model Workspace**.
+
+3. Create two parameter data objects. Select **Add** > **Simulink Parameter**. Name the parameter objects `PARAM_setpoint_flow` and `PARAM_setpoint_temp`. Set the value of `PARAM_setpoint_flow` to `3`. Set the value of `PARAM_setpoint_temp` to `2`.
+
+4. To configure the storage class for the model parameters, click **Configure**.
+
+5. In the Embedded Coder app, in the Code Mappings editor, click the **Data Defaults** tab.
+
+6. Expand **Parameters**.
+
+7. For **Model Parameters**, set **Storage class** to `Const`. Click the pencil icon and set the **HeaderFile** property to `ex_ext_ctrl_params.h` and the **DefinitionFile** property to `ex_ext_ctrl_params.c`.
+
+8. On the **Parameters** tab, for each parameter, set **Storage Class** to `Model default: Const`.
+
+9. In the model, for Constant block `Flow Setpt`, set block parameter **Constant value** to `PARAM_setpoint_flow`. For Constant block `Temp Setpt`, set **Constant value** to `PARAM_setpoint_temp`.
+
+10. For the parameters to be tunable, set model configuration parameter **Default parameter behavior** to `Tunable`.
+
+11. Save the model.
+
+Alternatively, to configure the parameter interfaces programmatically or at the command prompt, use these commands.
+
+```
+setDataDefault(cm,'ModelParameters','StorageClass','Const','HeaderFile', ...
+    'ex_ext_ctrl_params.h','DefinitionFile','ex_ext_ctrl_params.c');
+setModelParameter(cm,'PARAM_setpoint_flow','StorageClass','Model default');
+setModelParameter(cm,'PARAM_setpoint_temp','StorageClass','Model default');
+set_param('ex_ext_ctrl_alg','DefaultParameterBehavior','Tunable');
+
+
+```
+
+### Configure Code for States
+
+In the external code, internal data that does not participate in the module interfaces, such as state data and local variables in functions, conform to naming schemes. In the model, configure internal data that appears in the generated code to align with the external code naming schemes.
+
+1. In the model Configuration Parameters dialog box, open the **Code Generation** > **Identifiers** pane.
+
+2. Set **Global variables** to naming rule `$R$N_data$M`. This setting controls the names of global variables, such as those that represent state data. The naming rule `$R$N_data_$M` most closely approximates the scheme that the state variables in the external code use. In the naming rule:
+
+*   `$R` represents the name of the model, `ex_ext_ctrl_alg`.
+    
+*   `$N` represents the name of the model element to which the naming rule applies, such as a signal, block state, or standard data structure.
+    
+*   `$M` represents name-mangling text that the code generator inserts to avoid name clashes. For most naming rules, this token is required.
+    
+
+3. Set **Local temporary variables** and **Local block output variables** to `$N_local$M`.
+
+Alternatively, to set the configuration parameters programmatically or at the command prompt, use these commands.
+
+```
+set_param('ex_ext_ctrl_alg','CustomSymbolStrGlobalVar','$R$N_data$M')
+set_param('ex_ext_ctrl_alg','CustomSymbolStrTmpVar','$N_local$M')
+set_param('ex_ext_ctrl_alg','CustomSymbolStrBlkIO','$N_local$M')
+
+
+```
+
+Configure the state data in the model to appear in the generated code as separate global variables instead of fields of the standard DWork structure.
+
+1. In the Code Mappings editor, click the **Data Defaults** tab.
+
+2. Expand **Signals** and select the `Signals, states, and internal data` row.
+
+3. Set the storage class to `ExportedGlobal`.
+
+4. On the **Signals/States** tab, for each state, set the storage class to `Model default: Exported Global`.
+
+5. Save the model.
+
+Alternatively, to configure the state data for code generation programmatically or at the command prompt, use these commands:
+
+```
+setDataDefault(cm,'InternalData','StorageClass','ExportedGlobal');
+blockHandles = find(cm, 'States');
+setState(cm,blockHandles,'StorageClass','Model default');
+
+
+```
+
+### Configure Organization of Code in Generated Files
+
+By default, when you generate code with system target file `ert.tlc`, the code generator uses built-in code generation template (CGT) file `ert_code_template.cgt`. The template governs the organization and appearance of code in each generated file.
+
+For this example, use the example template file `ex_my_code_template.cgt` instead. The example template file conforms more closely to the organization of the files for this example. For example, the template organizes similar code constructs into named sections (delimited by comments) and, at the top of the template, specifies minimal information about each generated file.
+
+```
+cd(exampleFolder)
+type('ex_my_code_template.cgt')
+
+
+```
+
+1. Copy `ex_my_code_template.cgt` to the `ex_ext_ctrl_alg` folder.
+
+```
+copyfile("ex_my_code_template.cgt","ex_ext_ctrl_alg");
+
+
+```
+
+2. In the model Configuration Parameters dialog box, open the **Code Generation** > **Templates** pane.
+
+3. Under **Code templates** and **Data templates**, set parameters **Sourc file template** and **Header file template** to|ex_my_code_template.cgt|.
+
+Alternatively, to set the parameters programmatically or at the command prompt, use these commands.
+
+```
+set_param('ex_ext_ctrl_alg','ERTSrcFileBannerTemplate','ex_my_code_template.cgt')
+set_param('ex_ext_ctrl_alg','ERTHdrFileBannerTemplate','ex_my_code_template.cgt')
+set_param('ex_ext_ctrl_alg','ERTDataSrcFileTemplate','ex_my_code_template.cgt')
+set_param('ex_ext_ctrl_alg','ERTDataHdrFileTemplate','ex_my_code_template.cgt')
+
+
+```
+
+### Generate and Inspect Code
+
+Because the external code defines a `main` function, select model configuration parameter **Generate code only** and clear parameter **Generate an example main program**.
+
+```
+set_param('ex_ext_ctrl_alg','GenCodeOnly','on')
+set_param('ex_ext_ctrl_alg','GenerateSampleERTMain','off')
+
+
+```
+
+Generate code from the model.
+
+```
+slbuild('ex_ext_ctrl_alg')
+
+
+```
+
+In the **Code** view or code generation report, inspect the generated files to confirm that the code meets the requirements.
+
+The file `ex_ext_ctrl_sigs.c` defines the control output signals `CONTR_SIG_FLOW` and `CONTR_SIG_TEMP`.
+
+```
+dataPath_flow_T CONTR_SIG_FLOW;
+dataPath_temp_T CONTR_SIG_TEMP;
+
+```
+
+The setpoint parameters appear in `ex_ext_ctrl_params.c`.
+
+```
+const dataPath_flow_T PARAM_setpoint_flow = 3.0;
+const dataPath_temp_T PARAM_setpoint_temp = 2.0;
+
+```
+
+The file `ex_ext_ctrl_alg.c` defines global variables to store state data. The variables follow the specified naming rule.
+
+```
+dataPath_temp_T ex_ext__Integrator_DSTATE_datag;
+dataPath_flow_T ex_ext_c_Integrator_DSTATE_data;
+dataPath_temp_T ex_ext_ctrl_Filter_DSTATE_datad;
+dataPath_flow_T ex_ext_ctrl__Filter_DSTATE_data;
+
+```
+
+In the same file, the model execution function, `ex_ext_ctrl_alg_step`, creates local function variables to store temporary calculations. The variables follow the specified naming scheme.
+
+```
+dataPath_flow_T FilterCoefficient_local;
+dataPath_flow_T IntegralGain_local;
+dataPath_temp_T Diff1_local;
+dataPath_temp_T FilterCoefficient_locali;
+
+```
+
+Some of the global and local variable names contain extra mangling characters that prevent name clashes. The extra characters correspond to the `$M` token in the specified naming rules.
+
+The generated code files are in the generated folders `ex_ext_ctrl_alg_ert_rtw` and `slprj`. You must configure file management systems and build tools to use these folders and files.
+
+## Related Topics
+
+*   [Choose an External Code Integration Workflow](https://ww2.mathworks.cn/help/ecoder/ug/choose-an-external-code-integration-approach.html)
+*   [Exchange Data Between External C/C++ Code and Simulink Model or Generated Code](https://ww2.mathworks.cn/help/ecoder/ug/generate-code-for-interfacing-data-with-external-code.html)
+*   [Control Data and Function Interface in Generated Code](https://ww2.mathworks.cn/help/ecoder/ug/control-data-interface-in-the-generated-code.html)
+*   [Configure Generated Code According to Interface Control Document Specifications](https://ww2.mathworks.cn/help/ecoder/ug/configure-generated-code-according-to-ICD-interactively.html)
+*   [How Generated Code Stores Internal Signal, State, and Parameter Data](https://ww2.mathworks.cn/help/ecoder/ug/how-generated-code-stores-internal-signal-state-and-parameter-data.html)
+*   [Specify Templates For Code Generation](https://ww2.mathworks.cn/help/ecoder/ug/custom-file-processing-user-interface-options.html)
